@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunrise Đà Nẵng Hotel</title>
+
+    <link rel="stylesheet" href="Frontend/css/homepage.css">
+    <script src="Frontend/js/homepage.js" defer></script>
+</head>
+<body>
+
+<header class="header">
+    <div class="navbar container">
+        <a href="#" class="logo">
+            <span class="logo-icon">☀</span>
+            <span class="logo-text">
+                SUNRISE<br>
+                ĐÀ NẴNG
+                <small>— HOTEL —</small>
+            </span>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle">☰</button>
+
+        <nav class="nav-menu" id="navMenu">
+            <a href="#home" class="active">Trang chủ</a>
+            <a href="#about">Giới thiệu</a>
+
+            <div class="dropdown">
+                <a href="#rooms">Phòng nghỉ <span>⌄</span></a>
+                <div class="dropdown-content">
+                    <a href="#rooms">Phòng tiêu chuẩn</a>
+                    <a href="#rooms">Phòng cao cấp</a>
+                    <a href="#rooms">Phòng Deluxe</a>
+                    <a href="#rooms">Phòng Suite</a>
+                </div>
+            </div>
+
+            <a href="#services">Dịch vụ</a>
+            <a href="#offers">Ưu đãi</a>
+            <a href="#reviews">Đánh giá</a>
+            <a href="#contact">Liên hệ</a>
+            <a href="Frontend/html/register.html" class="login-link">Đăng ký</a>
+            <a href="Frontend/html/login.html" class="login-link">Đăng nhập</a>
+        </nav>
+
+        <a href="#booking" class="header-booking">
+            ▦ Đặt phòng ngay
+        </a>
+    </div>
+</header>
+
+<main>
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-shade"></div>
+
+        <button class="hero-arrow hero-prev" id="heroPrev">‹</button>
+        <button class="hero-arrow hero-next" id="heroNext">›</button>
+
+        <div class="hero-content">
+            <p class="welcome-script">Chào mừng đến với</p>
+            <h1>Sunrise Đà Nẵng</h1>
+
+            <p class="hero-description">
+                Trải nghiệm kỳ nghỉ tuyệt vời bên bờ biển Mỹ Khê
+            </p>
+
+            <div class="rating">
+                <span>★★★★★</span>
+            </div>
+
+            <div class="hero-benefits">
+                <span>📍 Vị trí đắc địa</span>
+                <span>◇ Dịch vụ đẳng cấp</span>
+                <span>♧ Hỗ trợ 24/7</span>
+            </div>
+
+            <a href="#rooms" class="hero-button">
+                Khám phá ngay <span>→</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Booking -->
+    <section class="booking-wrap" id="booking">
+        <form class="booking-bar" id="bookingForm">
+
+            <div class="booking-field">
+                <span class="field-icon">▦</span>
+                <div>
+                    <label for="checkin">Ngày nhận phòng</label>
+                    <input type="date" id="checkin" required>
+                </div>
+            </div>
+
+            <div class="booking-field">
+                <span class="field-icon">▧</span>
+                <div>
+                    <label for="checkout">Ngày trả phòng</label>
+                    <input type="date" id="checkout" required>
+                </div>
+            </div>
+            <!-- Bộ chọn số khách -->
+<div class="booking-field guest-field">
+    <span class="field-icon">♙</span>
+
+    <button type="button" class="guest-trigger" id="guestTrigger">
+        <span>
+            <label>Số khách</label>
+            <strong id="guestSummary">2 khách · 1 phòng</strong>
+        </span>
+        <span class="guest-chevron">⌄</span>
+    </button>
+
+    <!-- Hộp chọn khách -->
+    <div class="guest-popup" id="guestPopup">
+
+        <div class="counter-row">
+            <span>Người lớn</span>
+            <div class="counter">
+                <button type="button" data-counter="adults" data-step="-1">−</button>
+                <span id="adultsValue">2</span>
+                <button type="button" data-counter="adults" data-step="1">+</button>
+            </div>
+        </div>
+
+        <div class="counter-row">
+            <span>Trẻ em</span>
+            <div class="counter">
+                <button type="button" data-counter="children" data-step="-1">−</button>
+                <span id="childrenValue">0</span>
+                <button type="button" data-counter="children" data-step="1">+</button>
+            </div>
+        </div>
+
+        <div class="counter-row">
+            <span>Phòng</span>
+            <div class="counter">
+                <button type="button" data-counter="rooms" data-step="-1">−</button>
+                <span id="roomsValue">1</span>
+                <button type="button" data-counter="rooms" data-step="1">+</button>
+            </div>
+        </div>
+
+        <div class="guest-option">
+            <span>Đi công tác?</span>
+            <label class="switch">
+                <input type="checkbox" id="businessTrip">
+                <span class="switch-slider"></span>
+            </label>
+        </div>
+
+        <div class="guest-option">
+            <span>Mang thú cưng đi cùng</span>
+            <label class="switch">
+                <input type="checkbox" id="withPet">
+                <span class="switch-slider"></span>
+            </label>
+        </div>
+
+        <p class="pet-note">
+            Động vật trợ giúp không được xem là vật nuôi.
+            <a href="#services">Đọc thêm về chủ đề du lịch cùng động vật trợ giúp</a>
+        </p>
+
+        <button type="button" class="guest-done" id="guestDone">
+            Xong
+        </button>
+    </div>
+</div>
+            <button type="submit" class="search-button">
+                <span>⌕</span> Tìm phòng
+            </button>
+        </form>
+    </section>
+
+    <!-- Highlights -->
+    <section class="highlights" id="services">
+        <div class="container highlight-grid">
+            <div class="highlight-item">
+                <span class="highlight-icon">🛏</span>
+                <div>
+                    <h3>Phòng nghỉ sang trọng</h3>
+                    <p>Không gian hiện đại, tiện nghi</p>
+                </div>
+            </div>
+
+            <div class="highlight-item">
+                <span class="highlight-icon">☕</span>
+                <div>
+                    <h3>Nhà hàng tinh tế</h3>
+                    <p>Ẩm thực đa dạng, hấp dẫn</p>
+                </div>
+            </div>
+
+            <div class="highlight-item">
+                <span class="highlight-icon">♧</span>
+                <div>
+                    <h3>Spa thư giãn</h3>
+                    <p>Chăm sóc sức khỏe toàn diện</p>
+                </div>
+            </div>
+
+            <div class="highlight-item">
+                <span class="highlight-icon">≋</span>
+                <div>
+                    <h3>Gần biển Mỹ Khê</h3>
+                    <p>Tận hưởng biển xanh, cát trắng</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms -->
+    <section class="rooms-section" id="rooms">
+        <div class="section-heading">
+            <div class="heading-decor">
+                <span></span>
+                <p>KHÁM PHÁ</p>
+                <span></span>
+            </div>
+
+            <h2>Các hạng phòng nổi bật</h2>
+        </div>
+
+        <div class="room-list container">
+            <article class="room-card">
+                <div class="room-image">
+                    <img src="Frontend/assets/images/room-standard.jpg"
+                         alt="Phòng tiêu chuẩn">
+                    <span class="room-label">Tiêu chuẩn</span>
+                    <button class="room-arrow">›</button>
+                </div>
+                <div class="room-info">
+                    <h3>Phòng tiêu chuẩn</h3>
+                    <p>Không gian ấm cúng, tiện nghi</p>
+                    <div class="room-price">
+                        <strong>850.000đ</strong> / đêm
+                    </div>
+                </div>
+            </article>
+
+            <article class="room-card">
+                <div class="room-image">
+                    <img src="Frontend/assets/images/room-premium.jpg"
+                         alt="Phòng cao cấp">
+                    <span class="room-label">Cao cấp</span>
+                    <button class="room-arrow">›</button>
+                </div>
+                <div class="room-info">
+                    <h3>Phòng cao cấp</h3>
+                    <p>Không gian rộng rãi, sang trọng</p>
+                    <div class="room-price">
+                        <strong>1.200.000đ</strong> / đêm
+                    </div>
+                </div>
+            </article>
+
+            <article class="room-card">
+                <div class="room-image">
+                    <img src="Frontend/assets/images/room-deluxe.jpg"
+                         alt="Phòng Deluxe">
+                    <span class="room-label">Deluxe</span>
+                    <button class="room-arrow">›</button>
+                </div>
+                <div class="room-info">
+                    <h3>Phòng Deluxe</h3>
+                    <p>Tầm nhìn hướng biển tuyệt đẹp</p>
+                    <div class="room-price">
+                        <strong>1.600.000đ</strong> / đêm
+                    </div>
+                </div>
+            </article>
+
+            <article class="room-card">
+                <div class="room-image">
+                    <img src="Frontend/assets/images/room-suite.jpg"
+                         alt="Phòng Suite">
+                    <span class="room-label">Suite</span>
+                    <button class="room-arrow">›</button>
+                </div>
+                <div class="room-info">
+                    <h3>Phòng Suite</h3>
+                    <p>Trải nghiệm nghỉ dưỡng cao cấp</p>
+                    <div class="room-price">
+                        <strong>2.000.000đ</strong> / đêm
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <p class="section-subtitle">SUNRISE ĐÀ NẴNG HOTEL</p>
+            <h2>Nơi kỳ nghỉ trở thành kỷ niệm</h2>
+            <p>
+                Tận hưởng không gian nghỉ dưỡng tuyệt vời, dịch vụ chuyên nghiệp
+                và vẻ đẹp của thành phố biển Đà Nẵng.
+            </p>
+        </div>
+    </section>
+
+    <section class="about-section" id="offers">
+        <div class="container">
+            <p class="section-subtitle">ƯU ĐÃI ĐẶC BIỆT</p>
+            <h2>Đặt phòng sớm – Nhận ưu đãi hấp dẫn</h2>
+        </div>
+    </section>
+
+    <section class="about-section" id="reviews">
+        <div class="container">
+            <p class="section-subtitle">ĐÁNH GIÁ</p>
+            <h2>Trải nghiệm của khách hàng</h2>
+            <p>★★★★★</p>
+        </div>
+    </section>
+</main>
+
+<footer class="footer" id="contact">
+    <div class="container">
+        <h2>SUNRISE ĐÀ NẴNG HOTEL</h2>
+        <p>Địa chỉ: Đà Nẵng, Việt Nam</p>
+        <p>Điện thoại: 0236 000 000</p>
+        <p>Email: sunrisehotel@example.com</p>
+    </div>
+</footer>
+
+</body>
+</html>
