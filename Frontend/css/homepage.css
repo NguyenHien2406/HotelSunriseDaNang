@@ -924,3 +924,34 @@ select {
     background: #bd8125;
     color: #fff;
 }
+/* Icon mũi tên chọn số khách */
+.guest-chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+    background: #f8f3e8;
+
+    color: #b68a3a;
+    font-size: 13px;
+
+    transition: all 0.3s ease;
+}
+
+.guest-trigger:hover .guest-chevron {
+    background: #b68a3a;
+    color: #ffffff;
+}
+
+/* Xoay mũi tên khi mở hộp chọn khách */
+.guest-trigger.active .guest-chevron i {
+    transform: rotate(180deg);
+}
+
+.guest-chevron i {
+    transition: transform 0.3s ease;
+}

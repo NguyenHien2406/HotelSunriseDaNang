@@ -1,0 +1,503 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+
+    background:
+        linear-gradient(
+            rgba(12, 23, 42, 0.15),
+            rgba(12, 23, 42, 0.15)
+        ),
+        url("https://images.unsplash.com/photo-1571896349842-33c89424de2d")
+        center / cover no-repeat fixed;
+}
+
+/* Khung đăng nhập */
+
+.login-container {
+    width: 100%;
+    max-width: 1400px;
+    min-height: 720px;
+
+    display: grid;
+    grid-template-columns: 1fr 0.95fr;
+
+    background: #fffaf4;
+    border-radius: 28px;
+    overflow: hidden;
+
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+}
+
+/* Bên trái */
+
+.welcome-section {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 45px 55px;
+    color: white;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(15, 30, 55, 0.72),
+            rgba(15, 30, 55, 0.30),
+            rgba(15, 30, 55, 0.80)
+        ),
+        url("../assets/images/banner_login.png")
+        center / cover no-repeat;
+}
+
+/* Logo */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.brand-icon {
+    font-size: 48px;
+    color: #e8b44d;
+}
+
+.brand-name h2 {
+    font-family: Georgia, serif;
+    font-size: 30px;
+    color: #f5d18a;
+}
+
+.brand-name p {
+    margin-top: 7px;
+    color: #f5d18a;
+    letter-spacing: 4px;
+    font-size: 13px;
+}
+
+/* Nội dung giới thiệu */
+
+.welcome-content {
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 70px 0;
+}
+
+.welcome-content h1 {
+    font-family: Georgia, serif;
+    font-size: 38px;
+    line-height: 1.5;
+}
+
+.welcome-content h1 span {
+    display: block;
+    color: #f5c66c;
+}
+
+.gold-line {
+    width: 100px;
+    height: 4px;
+    background: #e8b44d;
+    margin: 25px 0;
+}
+
+.welcome-content p {
+    font-size: 20px;
+    line-height: 1.8;
+    color: #f3f3f3;
+}
+
+/* Các tiện ích */
+
+.benefits {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.benefit-item {
+    flex: 1;
+    text-align: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.benefit-item:last-child {
+    border-right: none;
+}
+
+.benefit-item i {
+    font-size: 32px;
+    color: #f5c66c;
+    margin-bottom: 15px;
+}
+
+.benefit-item p {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* Bên phải */
+
+.form-section {
+    padding: 55px 65px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background: #fffaf4;
+}
+
+/* Tiêu đề */
+
+.form-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.form-header h1 {
+    font-size: 32px;
+    color: #29252c;
+}
+
+.header-line {
+    width: 150px;
+    height: 3px;
+    background: #d99b2b;
+    margin: 20px auto;
+}
+
+.form-header p {
+    color: #777;
+    font-size: 16px;
+}
+
+/* Các ô nhập */
+
+.form-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    height: 62px;
+    margin-bottom: 22px;
+
+    border: 1px solid #d8d1c9;
+    border-radius: 13px;
+
+    background: #fff;
+    transition: 0.3s;
+}
+
+.form-group:focus-within {
+    border-color: #d99b2b;
+    box-shadow: 0 0 0 3px rgba(217, 155, 43, 0.12);
+}
+
+.form-group > i:first-child {
+    width: 60px;
+    text-align: center;
+    font-size: 20px;
+    color: #81766f;
+}
+
+.form-group input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+
+    border: none;
+    outline: none;
+
+    font-size: 16px;
+    background: transparent;
+    color: #29252c;
+}
+
+.form-group input::placeholder {
+    color: #aaa19a;
+}
+
+/* Nút hiện mật khẩu */
+
+.toggle-password {
+    width: 50px;
+    height: 100%;
+
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    color: #81766f;
+    font-size: 18px;
+}
+
+/* Ghi nhớ */
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+
+    margin: 5px 0 25px;
+    font-size: 14px;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: #514942;
+}
+
+.remember input {
+    accent-color: #d99b2b;
+    width: 17px;
+    height: 17px;
+}
+
+.form-options a {
+    text-decoration: none;
+    color: #c58a20;
+}
+
+.form-options a:hover {
+    text-decoration: underline;
+}
+
+/* Nút đăng nhập */
+
+.login-btn {
+    width: 100%;
+    height: 62px;
+
+    border: none;
+    border-radius: 13px;
+
+    background: linear-gradient(135deg, #e4ad42, #c88a1e);
+    color: white;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-btn i {
+    margin-right: 12px;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(200, 138, 30, 0.3);
+}
+
+.login-btn:active {
+    transform: scale(0.98);
+}
+
+/* Thông báo */
+
+#message {
+    font-size: 14px;
+    margin-bottom: 10px;
+    min-height: 0;
+}
+
+#message.error {
+    color: #dc3545;
+}
+
+#message.success {
+    color: #198754;
+}
+
+/* Đăng nhập mạng xã hội */
+
+.social-section {
+    margin-top: 30px;
+}
+
+.social-divider {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.social-divider span {
+    flex: 1;
+    height: 1px;
+    background: #d8d1c9;
+}
+
+.social-divider p {
+    color: #777;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.social-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-btn {
+    flex: 1;
+    height: 55px;
+
+    border: 1px solid #ded7d0;
+    border-radius: 12px;
+
+    background: #fff;
+    color: #39332e;
+
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.social-btn:hover {
+    background: #f8f2e9;
+    border-color: #d99b2b;
+}
+
+.social-btn i {
+    margin-right: 8px;
+    font-size: 20px;
+}
+
+.google-icon {
+    color: #4285f4;
+}
+
+.facebook-icon {
+    color: #1877f2;
+}
+
+/* Đăng ký */
+
+.register-link {
+    text-align: center;
+    margin-top: 30px;
+    color: #514942;
+    font-size: 15px;
+}
+
+.register-link a {
+    color: #c58a20;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* Quay về trang chủ */
+
+.back-home {
+    margin-top: 25px;
+    text-align: center;
+
+    color: #82766a;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.back-home i {
+    margin-right: 8px;
+}
+
+.back-home:hover {
+    color: #c58a20;
+}
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+    .login-container {
+        grid-template-columns: 1fr;
+        max-width: 650px;
+    }
+
+    .welcome-section {
+        min-height: 400px;
+        padding: 35px;
+    }
+
+    .welcome-content {
+        padding: 40px 0;
+    }
+
+    .form-section {
+        padding: 45px 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 12px;
+    }
+
+    .login-container {
+        border-radius: 18px;
+    }
+
+    .welcome-section {
+        min-height: 350px;
+        padding: 25px;
+    }
+
+    .brand-name h2 {
+        font-size: 24px;
+    }
+
+    .welcome-content h1 {
+        font-size: 27px;
+    }
+
+    .welcome-content p {
+        font-size: 16px;
+    }
+
+    .benefit-item i {
+        font-size: 24px;
+    }
+
+    .benefit-item p {
+        font-size: 12px;
+    }
+
+    .form-section {
+        padding: 35px 20px;
+    }
+
+    .form-header h1 {
+        font-size: 25px;
+    }
+
+    .form-options {
+        font-size: 12px;
+    }
+
+    .social-buttons {
+        flex-direction: column;
+    }
+}

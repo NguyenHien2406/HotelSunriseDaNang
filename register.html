@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Đăng ký - Hotel Sunrise</title>
+
+    <link rel="stylesheet" href="./Frontend/css/register.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="register-container">
+
+    <!-- Bên trái: Giới thiệu khách sạn -->
+    <div class="welcome-section">
+
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-hotel"></i>
+            </div>
+
+            <div class="brand-name">
+                <h2>Hotel Sunrise</h2>
+                <p>— DA NANG —</p>
+            </div>
+        </div>
+
+        <div class="welcome-content">
+            <h1>
+                Đăng ký tài khoản
+                <span>cùng chúng tôi!</span>
+            </h1>
+
+            <div class="gold-line"></div>
+
+            <p>
+                Trải nghiệm kỳ nghỉ tuyệt vời<br>
+                với nhiều ưu đãi hấp dẫn.
+            </p>
+        </div>
+
+        <div class="benefits">
+
+            <div class="benefit-item">
+                <i class="fa-regular fa-gem"></i>
+                <p>Ưu đãi<br>đặc biệt</p>
+            </div>
+
+            <div class="benefit-item">
+                <i class="fa-solid fa-headset"></i>
+                <p>Hỗ trợ<br>24/7</p>
+            </div>
+
+            <div class="benefit-item">
+                <i class="fa-solid fa-shield-halved"></i>
+                <p>An toàn<br>bảo mật</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bên phải: Form đăng ký -->
+    <div class="form-section">
+
+        <div class="form-header">
+            <h1>Đăng ký tài khoản</h1>
+
+            <div class="header-line"></div>
+
+            <p>
+                Vui lòng điền thông tin để tạo tài khoản
+            </p>
+        </div>
+
+        <form id="registerForm">
+
+            <!-- Họ tên -->
+            <div class="form-group">
+                <i class="fa-regular fa-user"></i>
+
+                <input type="text"
+                       id="fullname"
+                       placeholder="Họ và tên"
+                       autocomplete="name"
+                       required>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <i class="fa-regular fa-envelope"></i>
+
+                <input type="email"
+                       id="email"
+                       placeholder="Email của bạn"
+                       autocomplete="email"
+                       required>
+            </div>
+
+            <!-- Số điện thoại -->
+            <div class="form-group">
+                <i class="fa-solid fa-phone"></i>
+
+                <input type="tel"
+                       id="phone"
+                       placeholder="Số điện thoại"
+                       autocomplete="tel"
+                       required>
+            </div>
+
+            <!-- Mật khẩu -->
+            <div class="form-group">
+                <i class="fa-solid fa-lock"></i>
+
+                <input type="password"
+                       id="password"
+                       placeholder="Mật khẩu"
+                       autocomplete="new-password"
+                       required>
+
+                <button type="button"
+                        class="toggle-password"
+                        data-target="password"
+                        aria-label="Hiện mật khẩu">
+
+                    <i class="fa-regular fa-eye-slash"></i>
+                </button>
+            </div>
+
+            <!-- Xác nhận mật khẩu -->
+            <div class="form-group">
+                <i class="fa-solid fa-lock"></i>
+
+                <input type="password"
+                       id="confirmPassword"
+                       placeholder="Nhập lại mật khẩu"
+                       autocomplete="new-password"
+                       required>
+
+                <button type="button"
+                        class="toggle-password"
+                        data-target="confirmPassword"
+                        aria-label="Hiện mật khẩu">
+
+                    <i class="fa-regular fa-eye-slash"></i>
+                </button>
+            </div>
+
+            <p id="message"></p>
+
+            <!-- Nút đăng ký -->
+            <button type="submit" class="register-btn">
+                <i class="fa-solid fa-user-plus"></i>
+                <span>Đăng ký</span>
+            </button>
+
+        </form>
+
+        <!-- Đăng ký bằng mạng xã hội -->
+        <div class="social-section">
+
+            <div class="social-divider">
+                <span></span>
+                <p>Hoặc đăng ký bằng</p>
+                <span></span>
+            </div>
+
+            <div class="social-buttons">
+
+                <button type="button" class="social-btn">
+                    <i class="fa-brands fa-google"></i>
+                    Google
+                </button>
+
+                <button type="button" class="social-btn">
+                    <i class="fa-brands fa-facebook"></i>
+                    Facebook
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Đăng nhập -->
+        <div class="login-link">
+            Đã có tài khoản?
+            <a href="login.html">Đăng nhập ngay</a>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="./Frontend/js/register.js"></script>
+
+</body>
+</html>

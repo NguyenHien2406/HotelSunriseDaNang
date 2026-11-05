@@ -104,7 +104,14 @@ const guestCounts = {
 
 // Mở hoặc đóng popup
 guestTrigger.addEventListener("click", function () {
+
     guestPopup.classList.toggle("open");
+
+    guestTrigger.classList.toggle(
+        "active",
+        guestPopup.classList.contains("open")
+    );
+
 });
 
 // Cập nhật giá trị bộ đếm
@@ -157,17 +164,25 @@ function updateGuestSummary() {
 
 // Đóng popup khi bấm Xong
 guestDone.addEventListener("click", function () {
+
     guestPopup.classList.remove("open");
+    guestTrigger.classList.remove("active");
+
 });
 
 // Đóng popup khi click bên ngoài
 document.addEventListener("click", function (event) {
+
     if (
         !guestPopup.contains(event.target) &&
         !guestTrigger.contains(event.target)
     ) {
+
         guestPopup.classList.remove("open");
+        guestTrigger.classList.remove("active");
+
     }
+
 });
 // Chuyển ảnh trong các hạng phòng nổi bật
 const roomImages = {

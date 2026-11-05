@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Đăng nhập - Hotel Sunrise</title>
+
+    <link rel="stylesheet" href="./Frontend/css/login.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <!-- Bên trái: Giới thiệu khách sạn -->
+    <section class="welcome-section">
+
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-sun"></i>
+            </div>
+
+            <div class="brand-name">
+                <h2>Hotel Sunrise</h2>
+                <p>— DA NANG —</p>
+            </div>
+        </div>
+
+        <div class="welcome-content">
+            <h1>
+                Chào mừng trở lại!
+                <span>Đăng nhập để trải nghiệm</span>
+            </h1>
+
+            <div class="gold-line"></div>
+
+            <p>
+                Khám phá kỳ nghỉ tuyệt vời<br>
+                với những trải nghiệm đẳng cấp.
+            </p>
+        </div>
+
+        <div class="benefits">
+
+            <div class="benefit-item">
+                <i class="fa-regular fa-gem"></i>
+                <p>Ưu đãi<br>đặc biệt</p>
+            </div>
+
+            <div class="benefit-item">
+                <i class="fa-solid fa-headset"></i>
+                <p>Hỗ trợ<br>24/7</p>
+            </div>
+
+            <div class="benefit-item">
+                <i class="fa-solid fa-shield-halved"></i>
+                <p>An toàn<br>bảo mật</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Bên phải: Form đăng nhập -->
+    <section class="form-section">
+
+        <div class="form-header">
+            <h1>Đăng nhập tài khoản</h1>
+
+            <div class="header-line"></div>
+
+            <p>Vui lòng nhập thông tin để tiếp tục</p>
+        </div>
+
+        <form id="loginForm">
+
+            <!-- Email hoặc số điện thoại -->
+            <div class="form-group">
+                <i class="fa-regular fa-user"></i>
+
+                <input
+                    type="text"
+                    id="email"
+                    placeholder="Email hoặc số điện thoại"
+                    autocomplete="username"
+                    required>
+            </div>
+
+            <!-- Mật khẩu -->
+            <div class="form-group">
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Mật khẩu"
+                    autocomplete="current-password"
+                    required>
+
+                <button
+                    type="button"
+                    class="toggle-password"
+                    data-target="password"
+                    aria-label="Hiện mật khẩu">
+
+                    <i class="fa-regular fa-eye-slash"></i>
+                </button>
+            </div>
+
+            <!-- Ghi nhớ và quên mật khẩu -->
+            <div class="form-options">
+
+                <label class="remember">
+                    <input type="checkbox" id="rememberMe">
+                    <span>Ghi nhớ đăng nhập</span>
+                </label>
+
+                <a href="#" id="forgotPassword">
+                    Quên mật khẩu?
+                </a>
+
+            </div>
+
+            <!-- Thông báo -->
+            <p id="message"></p>
+
+            <!-- Nút đăng nhập -->
+            <button type="submit" class="login-btn">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>Đăng nhập</span>
+            </button>
+
+        </form>
+
+        <!-- Đăng nhập mạng xã hội -->
+        <div class="social-section">
+
+            <div class="social-divider">
+                <span></span>
+                <p>Hoặc đăng nhập bằng</p>
+                <span></span>
+            </div>
+
+            <div class="social-buttons">
+
+                <button type="button" class="social-btn">
+                    <i class="fa-brands fa-google google-icon"></i>
+                    Google
+                </button>
+
+                <button type="button" class="social-btn">
+                    <i class="fa-brands fa-facebook facebook-icon"></i>
+                    Facebook
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Chuyển sang đăng ký -->
+        <div class="register-link">
+            Chưa có tài khoản?
+            <a href="register.html">Đăng ký ngay</a>
+        </div>
+
+        <a href="../../index.html" class="back-home">
+            <i class="fa-solid fa-arrow-left"></i>
+            Quay về trang chủ
+        </a>
+
+    </section>
+
+</div>
+
+<script src="./Frontend/js/login.js"></script>
+
+</body>
+</html>
