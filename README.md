@@ -111,3 +111,21 @@ HotelSunriseDaNang/
 │
 └── README.md                           # Tài liệu mô tả dự án
 ```
+
+## 🗄️ Sơ đồ cơ sở dữ liệu (Database ERD)
+
+Hệ thống sử dụng cơ sở dữ liệu MySQL để quản lý thông tin tài khoản, phòng khách sạn, đặt phòng, thanh toán và ví điện tử.
+
+Sơ đồ ERD thể hiện cấu trúc các bảng, khóa chính (Primary Key), khóa ngoại (Foreign Key) và mối quan hệ giữa các thực thể trong hệ thống.
+
+<p align="center">
+  <img
+    src="Frontend/assets/data_image/database.png"
+    alt="Hotel Sunrise Database ERD"
+    width="100%"
+  />
+</p>
+
+<p align="center">
+  <i>Hình: Sơ đồ thực thể liên kết cơ sở dữ liệu Hotel Sunrise Đà Nẵng</i>
+</p>
