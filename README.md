@@ -50,66 +50,74 @@ Dự án mô phỏng hệ thống thực tế với giao diện trực quan và 
 ```text
 HotelSunriseDaNang/
 │
-├── index.html                          # Trang chủ công khai dành cho User (Khách hàng)
-├── login.html                          # Trang đăng nhập chung (Phân luồng theo Role)
-├── register.html                       # Trang đăng ký tài khoản User mới
+├── .env                       # Biến môi trường hệ thống (PORT, DB_HOST, DB_USER, DB_PASS, DB_NAME, JWT_SECRET)
+├── package.json               # Quản lý dependencies chung (express, mysql2, cors, bcryptjs, dotenv...)
+├── package-lock.json          # Khóa phiên bản các thư viện cài đặt
+├── README.md                  # Tài liệu mô tả hướng dẫn cài đặt và vận hành dự án
 │
-├── Frontend/                           # Thư mục chứa giao diện (Client-side)
-│   │
-│   ├── admin/                          # 🔒 KHU VỰC DÀNH RIÊNG CHO ADMIN (Quản trị viên nội bộ)
-│   │   ├── dashboard.html              # Trang tổng quan thống kê doanh thu
-│   │   ├── rooms-manage.html           # Quản lý, thêm/sửa/xóa phòng khách sạn
-│   │   ├── bookings-manage.html        # Quản lý danh sách đơn đặt phòng của khách
-│   │   ├── customers-manage.html       # Quản lý thông tin khách hàng
-│   │   ├── employees-manage.html       # Quản lý nhân viên công ty
-│   │   └── invoices-manage.html        # Quản lý hóa đơn & thanh toán
-│   │
-│   ├── user/                           # 🌐 KHU VỰC DÀNH CHO USER (Khách hàng đặt phòng)
-│   │   ├── search.html                 # Trang tìm kiếm & lọc phòng khách sạn
-│   │   ├── room-detail.html            # Trang chi tiết phòng & tiện ích
-│   │   ├── my-bookings.html            # Lịch sử đặt phòng của cá nhân khách hàng
-│   │   └── profile.html                # Thông tin tài khoản cá nhân
-│   │
-│   ├── css/                            # File định dạng giao diện chung & riêng
-│   │   ├── style.css                   # CSS toàn hệ thống
-│   │   ├── admin.css                   # Giao diện trang quản trị
-│   │   └── user.css                    # Giao diện trang khách hàng
-│   │
-│   ├── js/                             # Xử lý logic phía Frontend
-│   │   ├── api.js                      # Cấu hình Axios/Fetch kèm gắn Token tự động
-│   │   ├── auth.js                     # Xử lý đăng nhập, lưu Token và phân quyền (Role Check)
-│   │   ├── admin-guard.js              # Kiểm tra quyền Admin trước khi vào trang quản trị
-│   │   ├── room-client.js              # Xử lý hiển thị phòng cho khách hàng
-│   │   └── booking-client.js           # Xử lý form đặt phòng
-│   │
-│   └── assets/                         # Tài nguyên đồ họa
-│       ├── images/                     # Ảnh phòng, banner công ty, logo
-│       └── icons/                      # Biểu tượng giao diện
+├── index.html                 # 🏠 Trang chủ công khai (Hiển thị banner, danh sách phòng nổi bật, form tìm kiếm)
+├── login.html                 # 🔑 Trang đăng nhập chung (Phân quyền tự động User / Admin)
+├── register.html              # 📝 Trang đăng ký tài khoản khách hàng mới
 │
-├── Backend/                            # Thư mục máy chủ (Node.js + Express)
-│   ├── src/
-│   │   ├── config/
-│   │   │   └── database.js             # Kết nối cơ sở dữ liệu MongoDB
-│   │   ├── models/                     # Định nghĩa Schema CSDL
-│   │   │   ├── User.js                 # Model Người dùng (Lưu trường role: 'admin' | 'user')
-│   │   │   ├── Room.js                 # Model Phòng khách sạn
-│   │   │   └── Booking.js              # Model Đặt phòng
-│   │   ├── middleware/
-│   │   │   └── authMiddleware.js       # Middleware kiểm tra Token và phân quyền (verifyAdmin)
-│   │   ├── routes/                     # Định tuyến API
-│   │   │   ├── authRoutes.js           # API Đăng nhập / Đăng ký
-│   │   │   ├── roomRoutes.js           # API Phòng (User xem, Admin CRUD)
-│   │   │   └── bookingRoutes.js        # API Đặt phòng
-│   │   ├── controllers/                # Xử lý logic nghiệp vụ từng module
-│   │   │   ├── authController.js
-│   │   │   ├── roomController.js
-│   │   │   └── bookingController.js
-│   │   └── app.js                      # Khởi tạo Express Server chính
+├── Frontend/                  # 🎨 Thư mục chứa mã nguồn giao diện phía Client (Vanilla HTML/CSS/JS)
 │   │
-│   ├── .env                            # Biến môi trường (PORT, MONGO_URI, JWT_SECRET)
-│   └── package.json                    # Quản lý thư viện Backend
+│   ├── admin/                 # 🔒 KHU VỰC QUẢN TRỊ VIÊN (Yêu cầu đăng nhập tài khoản có role='admin')
+│   │   ├── dashboard.html     # Trang tổng quan thống kê doanh thu, số lượng phòng, đơn đặt phòng
+│   │   ├── rooms-manage.html  # Quản lý danh sách phòng: Thêm, sửa, xóa, cập nhật trạng thái phòng
+│   │   ├── bookings-manage.html # Quản lý, phê duyệt hoặc hủy các đơn đặt phòng của khách hàng
+│   │   ├── customers-manage.html # Quản lý thông tin tài khoản và danh sách khách hàng
+│   │   ├── employees-manage.html # Quản lý nhân viên nội bộ khách sạn
+│   │   └── invoices-manage.html  # Quản lý hóa đơn, thanh toán và đối soát doanh thu
+│   │
+│   ├── user/                  # 🌐 KHU VỰC TRANG CON DÀNH CHO KHÁCH HÀNG ĐÃ ĐĂNG NHẬP
+│   │   ├── search.html        # Trang tìm kiếm, lọc phòng theo ngày, số khách, khoảng giá
+│   │   ├── room-detail.html   # Trang chi tiết thông tin phòng, tiện ích và các hình ảnh góc chụp khác
+│   │   ├── my-bookings.html   # Lịch sử và trạng thái các đơn đặt phòng cá nhân của khách
+│   │   └── profile.html       # Trang xem và cập nhật thông tin cá nhân, số dư ví điện tử
+│   │
+│   ├── css/                   # 📁 Thư mục chứa các file định dạng giao diện (Cascading Style Sheets)
+│   │   ├── style.css          # CSS toàn hệ thống / Dùng chung cho trang chủ
+│   │   ├── login.css          # Giao diện riêng cho trang đăng nhập
+│   │   ├── register.css       # Giao diện riêng cho trang đăng ký
+│   │   ├── admin.css          # Giao diện tổng thể cho khu vực quản trị (Admin Dashboard & Management)
+│   │   └── user.css           # Giao diện cho các trang con của khách hàng
+│   │
+│   ├── js/                    # 📁 Thư mục chứa mã nguồn xử lý logic phía trình duyệt
+│   │   ├── api.js             # Cấu hình Fetch API / Axios gốc kèm cơ chế gắn JWT Token tự động vào Header
+│   │   ├── auth.js            # Xử lý logic submit form đăng nhập, đăng ký và lưu trữ token vào localStorage
+│   │   ├── admin-guard.js     # Kiểm tra quyền hạn (Role check) trước khi cho phép truy cập vào các trang /admin/
+│   │   ├── homepage.js        # Xử lý tương tác trang chủ (Menu mobile, slider banner, bộ đếm số khách, đổi ảnh phòng)
+│   │   ├── room-client.js     # Xử lý gọi API lấy danh sách phòng và render ra giao diện tìm kiếm
+│   │   └── booking-client.js  # Xử lý logic gửi yêu cầu đặt phòng (Kiểm tra lịch trống, tính tiền, gọi API booking)
+│   │
+│   └── assets/                # 📁 Tài nguyên tĩnh (Đồ họa, hình ảnh, biểu tượng)
+│       ├── images/            # Chứa toàn bộ hình ảnh phòng (room-standard.jpg, room-deluxe.jpg...), banner, logo
+│       └── icons/             # Các biểu tượng giao diện tùy chỉnh (nếu có)
 │
-└── README.md                           # Tài liệu mô tả dự án
+└── Backend/                   # ⚙️ Thư mục máy chủ (Node.js + Express + Kết nối CSDL MySQL)
+    └── src/
+        ├── config/            # Cấu hình hệ thống
+        │   └── database.js    # Khởi tạo kết nối Pool MySQL (sử dụng thư viện `mysql2/promise`)
+        │
+        ├── models/            # Định nghĩa các hàm thao tác trực tiếp với cơ sở dữ liệu (Database Queries)
+        │   ├── User.js        # Truy vấn thông tin người dùng, kiểm tra tồn tại email/sđt, thêm user
+        │   ├── Room.js        # Truy vấn danh sách phòng, kiểm tra trạng thái phòng, cập nhật giá
+        │   └── Booking.js     # Xử lý giao dịch đặt phòng, kiểm tra trùng lịch (SELECT ... FOR UPDATE)
+        │
+        ├── middleware/        # Các hàm trung gian kiểm tra bảo mật (Middleware)
+        │   └── authMiddleware.js # Xác thực JWT Token (`verifyToken`) và kiểm tra quyền quản trị (`verifyAdmin`)
+        │
+        ├── routes/            # Định tuyến các đường dẫn API Endpoint của hệ thống
+        │   ├── authRoutes.js  # Định tuyến cho đăng nhập / đăng ký (`/api/auth/login`, `/api/auth/register`)
+        │   ├── roomRoutes.js  # Định tuyến quản lý phòng (`/api/rooms`)
+        │   └── bookingRoutes.js # Định tuyến quản lý đặt phòng (`/api/bookings`)
+        │
+        ├── controllers/       # Xử lý logic nghiệp vụ chi tiết cho từng module
+        │   ├── authController.js   # Xử lý mã hóa mật khẩu bcrypt, tạo JWT token khi đăng nhập
+        │   ├── roomController.js   # Xử lý lấy danh sách phòng, thêm/sửa/xóa phòng phía Admin
+        │   └── bookingController.js # Xử lý tính tiền, kiểm tra lịch trống và lưu đơn đặt phòng
+        │
+        └── app.js             # File trung tâm khởi tạo Express Server, cấu hình CORS, Static Folders và gọi Routes
 ```
 
 ## 🗄️ Sơ đồ cơ sở dữ liệu (Database ERD)
