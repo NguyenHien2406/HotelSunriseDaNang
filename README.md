@@ -41,7 +41,7 @@ Dự án mô phỏng hệ thống thực tế với giao diện trực quan và 
 ### **Backend**
 
 - **Node.js & Express.js**: Xây dựng máy chủ API RESTful mạnh mẽ.
-- **MongoDB & Mongoose**: Cơ sở dữ liệu NoSQL lưu trữ thông tin linh hoạt.
+- **MySQL**: Cơ sở dữ liệu MySQL lưu trữ thông tin linh hoạt.
 
 ---
 
