@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết phòng - Sunrise Đà Nẵng Hotel</title>
+
+    <link rel="stylesheet" href="../css/room_deltail.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <script src="../js/room_deltail.js" defer></script>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="header-container">
+
+        <a href="../../index.html" class="logo">
+            <i class="fa-solid fa-hotel"></i>
+            <div>
+                <h2>SUNRISE</h2>
+                <span>ĐÀ NẴNG HOTEL</span>
+            </div>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <nav class="nav-menu" id="navMenu">
+            <a href="../../index.html">Trang chủ</a>
+            <a href="#">Giới thiệu</a>
+            <a href="search.html" class="active">Phòng nghỉ</a>
+            <a href="#">Tiện ích</a>
+            <a href="#">Ưu đãi</a>
+            <a href="#">Liên hệ</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="tel:19001234" class="hotline">
+                <i class="fa-solid fa-phone"></i>
+                1900 1234
+            </a>
+            <a href="login.html" class="btn-login">Đăng nhập</a>
+            <a href="register.html" class="btn-register">Đăng ký</a>
+        </div>
+
+    </div>
+</header>
+
+<!-- PAGE BANNER -->
+<section class="page-banner">
+    <div class="banner-overlay"></div>
+    <div class="banner-content">
+        <h1>Chi tiết phòng</h1>
+        <div class="breadcrumb">
+            <a href="../../index.html"><i class="fa-solid fa-house"></i> Trang chủ</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="search.html">Phòng nghỉ</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>Deluxe Ocean View</span>
+        </div>
+    </div>
+</section>
+
+<main class="main-container">
+
+    <!-- ROOM INFORMATION -->
+    <section class="room-detail-layout">
+
+        <!-- LEFT: GALLERY -->
+        <div class="gallery-section">
+
+            <div class="main-image" id="mainImageContainer">
+                <img id="mainImage"
+                     src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1200"
+                     alt="Phòng Deluxe Ocean View">
+
+                <button class="gallery-arrow prev" id="prevImage">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+                <button class="gallery-arrow next" id="nextImage">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <div class="image-counter">
+                    <i class="fa-solid fa-camera"></i>
+                    <span id="imageCounter">1 / 6</span>
+                </div>
+
+                <button class="zoom-button" id="zoomImage">
+                    <i class="fa-solid fa-expand"></i>
+                </button>
+            </div>
+
+            <div class="thumbnail-list" id="thumbnailList">
+
+                <img class="thumbnail active"
+                     src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=300"
+                     alt="Góc phòng ngủ">
+
+                <img class="thumbnail"
+                     src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=300"
+                     alt="Góc nhìn phòng">
+
+                <img class="thumbnail"
+                     src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=300"
+                     alt="Phòng khách">
+
+                <img class="thumbnail"
+                     src="https://images.unsplash.com/photo-1620626011761-996317b8d101?w=300"
+                     alt="Phòng tắm">
+
+                <img class="thumbnail"
+                     src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=300"
+                     alt="Hồ bơi">
+
+                <img class="thumbnail"
+                     src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=300"
+                     alt="View biển">
+
+            </div>
+        </div>
+
+        <!-- CENTER: ROOM DETAILS -->
+        <div class="room-information">
+
+            <div class="room-heading">
+                <div>
+                    <span class="room-category">PHÒNG CAO CẤP</span>
+                    <h2>Deluxe Ocean View</h2>
+                </div>
+                <div class="room-rating">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+            </div>
+
+            <p class="room-short-description">
+                Không gian nghỉ dưỡng sang trọng, sở hữu tầm nhìn hướng biển tuyệt đẹp,
+                mang đến trải nghiệm thư giãn trọn vẹn tại Đà Nẵng.
+            </p>
+
+            <!-- ROOM SPECS -->
+            <div class="room-specs">
+
+                <div class="spec-item">
+                    <i class="fa-solid fa-maximize"></i>
+                    <span>Diện tích</span>
+                    <strong>32 m²</strong>
+                </div>
+
+                <div class="spec-item">
+                    <i class="fa-solid fa-bed"></i>
+                    <span>Loại giường</span>
+                    <strong>1 giường lớn</strong>
+                    <small>(1.8m)</small>
+                </div>
+
+                <div class="spec-item">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Sức chứa</span>
+                    <strong>2 người lớn</strong>
+                    <small>+ 1 trẻ em</small>
+                </div>
+
+            </div>
+
+            <!-- AMENITIES -->
+            <div class="amenities-box">
+                <h3>
+                    <i class="fa-solid fa-gem"></i>
+                    Tiện ích nổi bật
+                </h3>
+
+                <div class="amenities-grid">
+                    <div><i class="fa-solid fa-circle-check"></i> View biển tuyệt đẹp</div>
+                    <div><i class="fa-solid fa-circle-check"></i> Minibar</div>
+                    <div><i class="fa-solid fa-circle-check"></i> Wi-Fi miễn phí</div>
+                    <div><i class="fa-solid fa-circle-check"></i> Phòng tắm riêng</div>
+                    <div><i class="fa-solid fa-circle-check"></i> Điều hòa 2 chiều</div>
+                    <div><i class="fa-solid fa-circle-check"></i> Đồ dùng cá nhân</div>
+                    <div><i class="fa-solid fa-circle-check"></i> TV màn hình phẳng</div>
+                    <div><i class="fa-solid fa-circle-check"></i> Dịch vụ phòng 24/7</div>
+                    <div><i class="fa-solid fa-circle-check"></i> Két an toàn</div>
+                    <div><i class="fa-solid fa-circle-check"></i> Máy sấy tóc</div>
+                </div>
+            </div>
+
+            <div class="room-price-mobile">
+                <span>Giá chỉ từ</span>
+                <strong>1.250.000đ <small>/ đêm</small></strong>
+            </div>
+
+        </div>
+
+        <!-- RIGHT: BOOKING BOX -->
+        <aside class="booking-card">
+
+            <div class="booking-title">
+                <h3>Đặt phòng ngay</h3>
+            </div>
+
+            <div class="booking-content">
+
+                <div class="booking-field">
+                    <label><i class="fa-regular fa-calendar-check"></i> Ngày nhận phòng</label>
+                    <input type="date" id="checkIn">
+                </div>
+
+                <div class="booking-field">
+                    <label><i class="fa-regular fa-calendar-check"></i> Ngày trả phòng</label>
+                    <input type="date" id="checkOut">
+                </div>
+
+                <!-- GUEST SELECTOR -->
+                <div class="booking-field guest-field">
+                    <label><i class="fa-solid fa-user"></i> Số khách và phòng</label>
+
+                    <button class="guest-trigger" id="guestTrigger">
+                        <span id="guestSummary">2 người lớn · 1 phòng</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                    <div class="guest-dropdown" id="guestDropdown">
+
+                        <div class="guest-row">
+                            <div>
+                                <strong>Người lớn</strong>
+                                <small>Từ 12 tuổi trở lên</small>
+                            </div>
+                            <div class="counter">
+                                <button data-type="adults" data-change="-1">−</button>
+                                <span id="adultsValue">2</span>
+                                <button data-type="adults" data-change="1">+</button>
+                            </div>
+                        </div>
+
+                        <div class="guest-row">
+                            <div>
+                                <strong>Trẻ em</strong>
+                                <small>Dưới 12 tuổi</small>
+                            </div>
+                            <div class="counter">
+                                <button data-type="children" data-change="-1">−</button>
+                                <span id="childrenValue">0</span>
+                                <button data-type="children" data-change="1">+</button>
+                            </div>
+                        </div>
+
+                        <div class="guest-row">
+                            <div>
+                                <strong>Số phòng</strong>
+                                <small>Số lượng phòng muốn đặt</small>
+                            </div>
+                            <div class="counter">
+                                <button data-type="rooms" data-change="-1">−</button>
+                                <span id="roomsValue">1</span>
+                                <button data-type="rooms" data-change="1">+</button>
+                            </div>
+                        </div>
+
+                        <button class="guest-done" id="guestDone">Hoàn tất</button>
+                    </div>
+                </div>
+
+                <!-- PRICE -->
+                <div class="price-summary">
+                    <div>
+                        <span>Giá phòng / đêm</span>
+                        <strong>1.250.000đ</strong>
+                    </div>
+                    <div>
+                        <span>Số đêm</span>
+                        <strong id="nightCount">Chưa chọn</strong>
+                    </div>
+                    <div class="total-price">
+                        <span>Tạm tính</span>
+                        <strong id="totalPrice">1.250.000đ</strong>
+                    </div>
+                    <small>Giá tham khảo, chưa bao gồm các khoản phụ thu nếu có.</small>
+                </div>
+
+                <button class="btn-booking" id="bookNow">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    Đặt phòng
+                </button>
+
+                <div class="or-divider"><span>Hoặc</span></div>
+
+                <a href="tel:19001234" class="btn-contact">
+                    <i class="fa-solid fa-phone"></i>
+                    Liên hệ tư vấn
+                </a>
+
+            </div>
+        </aside>
+
+    </section>
+
+    <!-- ROOM DESCRIPTION -->
+    <section class="description-section">
+
+        <div class="description-content">
+            <h3><i class="fa-solid fa-bed"></i> Mô tả phòng</h3>
+
+            <p>
+                Phòng Deluxe Ocean View tại Sunrise Đà Nẵng Hotel mang đến không gian
+                nghỉ dưỡng sang trọng, hiện đại với tầm nhìn hướng biển tuyệt đẹp.
+                Thiết kế tinh tế, nội thất cao cấp cùng hệ thống tiện ích hiện đại
+                sẽ đem lại cho bạn và gia đình những trải nghiệm nghỉ dưỡng tuyệt vời.
+            </p>
+
+            <p>
+                Phòng được trang bị giường ngủ cao cấp, cửa sổ lớn đón ánh sáng tự nhiên,
+                phòng tắm riêng và đầy đủ các tiện nghi cần thiết.
+                Đây là lựa chọn lý tưởng cho các cặp đôi và gia đình nhỏ.
+            </p>
+        </div>
+
+        <div class="description-image">
+            <div class="description-overlay">
+                <h2>Trải nghiệm đẳng cấp</h2>
+                <span>Tại Sunrise Đà Nẵng</span>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- OTHER ROOM -->
+    <!-- OTHER ROOM -->
+    <!-- OTHER ROOM -->
+    <section class="other-rooms">
+
+        <div class="section-heading">
+            <span></span>
+            <h2><i class="fa-solid fa-bed"></i> Các phòng khác</h2>
+            <span></span>
+        </div>
+
+        <div class="other-room-grid">
+
+            <div class="other-room-card">
+                <img src="../assets/images/room-standard.jpg" alt="Phòng tiêu chuẩn">
+                <div class="other-room-info">
+                    <h3>Phòng tiêu chuẩn</h3>
+                    <p><i class="fa-solid fa-users"></i> 2 người lớn</p>
+                    <strong>850.000đ / đêm</strong>
+                    <a href="room_detail.html?type=standard">Xem chi tiết</a>
+                </div>
+            </div>
+
+            <div class="other-room-card">
+                <img src="../assets/images/room-premium.jpg" alt="Phòng cao cấp">
+                <div class="other-room-info">
+                    <h3>Phòng cao cấp</h3>
+                    <p><i class="fa-solid fa-users"></i> 2 người lớn · 1 trẻ em</p>
+                    <strong>1.200.000đ / đêm</strong>
+                    <a href="room_detail.html?type=premium">Xem chi tiết</a>
+                </div>
+            </div>
+
+            <div class="other-room-card">
+                <img src="../assets/images/room-deluxe.jpg" alt="Phòng Deluxe">
+                <div class="other-room-info">
+                    <h3>Phòng Deluxe</h3>
+                    <p><i class="fa-solid fa-users"></i> 2 người lớn · 1 trẻ em</p>
+                    <strong>1.600.000đ / đêm</strong>
+                    <a href="room_detail.html?type=deluxe">Xem chi tiết</a>
+                </div>
+            </div>
+
+            <div class="other-room-card">
+                <img src="../assets/images/room-suite.jpg" alt="Phòng Suite">
+                <div class="other-room-info">
+                    <h3>Phòng Suite</h3>
+                    <p><i class="fa-solid fa-users"></i> 4 người lớn</p>
+                    <strong>2.000.000đ / đêm</strong>
+                    <a href="room_detail.html?type=suite">Xem chi tiết</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<!-- IMAGE LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="closeLightbox">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <button class="lightbox-arrow lightbox-prev" id="lightboxPrev">
+        <i class="fa-solid fa-chevron-left"></i>
+    </button>
+
+    <img id="lightboxImage" src="" alt="Ảnh phòng khách sạn">
+
+    <button class="lightbox-arrow lightbox-next" id="lightboxNext">
+        <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+    <span class="lightbox-counter" id="lightboxCounter"></span>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-about">
+            <h2>SUNRISE ĐÀ NẴNG HOTEL</h2>
+            <p>
+                Mang đến trải nghiệm nghỉ dưỡng sang trọng,
+                thoải mái và đáng nhớ bên bờ biển Đà Nẵng.
+            </p>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Liên hệ</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Đà Nẵng, Việt Nam</p>
+            <p><i class="fa-solid fa-phone"></i> 1900 1234</p>
+            <p><i class="fa-solid fa-envelope"></i> support@sunrisehotel.vn</p>
+        </div>
+
+        <div class="footer-links">
+            <h3>Liên kết</h3>
+            <a href="../../index.html">Trang chủ</a>
+            <a href="./search.html">Tìm phòng</a>
+            <a href="#">Chính sách đặt phòng</a>
+            <a href="#">Điều khoản sử dụng</a>
+        </div>
+
+    </div>
+
+    <div class="copyright">
+        © 2026 Sunrise Đà Nẵng Hotel. All rights reserved.
+    </div>
+</footer>
+
+</body>
+</html>

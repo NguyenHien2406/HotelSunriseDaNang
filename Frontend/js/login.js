@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
 
     const loginForm = document.getElementById("loginForm");
@@ -49,56 +48,83 @@ document.addEventListener("DOMContentLoaded", function () {
         rememberMe.checked = true;
     }
 
-    // Xử lý đăng nhập
-    loginForm.addEventListener("submit", function (event) {
+    // Xử lý đăng nhập thực tế kết nối Backend API
+    loginForm.addEventListener("submit", async function (event) {
 
         event.preventDefault();
 
-        const email = emailInput.value.trim();
+        const usernameOrEmail = emailInput.value.trim();
         const password = passwordInput.value;
 
         message.textContent = "";
         message.className = "";
 
         // Kiểm tra dữ liệu
-        if (email === "" || password === "") {
-
+        if (usernameOrEmail === "" || password === "") {
             message.textContent = "Vui lòng nhập đầy đủ thông tin.";
             message.className = "error";
-
             return;
         }
 
         // Kiểm tra ghi nhớ đăng nhập
         if (rememberMe.checked) {
-
-            localStorage.setItem("rememberedEmail", email);
-
+            localStorage.setItem("rememberedEmail", usernameOrEmail);
         } else {
-
             localStorage.removeItem("rememberedEmail");
         }
 
-        // Demo giao diện
-        message.textContent =
-            "Giao diện đã nhận thông tin đăng nhập. Cần kết nối API để xác thực tài khoản.";
+        try {
+            message.textContent = "Đang kết nối đến máy chủ...";
+            message.className = "info";
 
-        message.className = "success";
+            const response = await fetch('http://localhost:5000/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ usernameOrEmail, password })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                message.textContent = "Đăng nhập thành công! Đang chuyển hướng...";
+                message.className = "success";
+
+                // Lưu JWT Token và thông tin user vào localStorage
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+
+                // Chuyển hướng sau 1 giây dựa vào role
+                setTimeout(() => {
+                    if (data.user.role === 'admin') {
+                        window.location.href = './Frontend/admin/index.html';
+                    } else {
+                        window.location.href = 'index.html';
+                    }
+                }, 1000);
+
+            } else {
+                message.textContent = data.message || "Tài khoản hoặc mật khẩu không chính xác!";
+                message.className = "error";
+            }
+
+        } catch (error) {
+            console.error("Lỗi kết nối:", error);
+            message.textContent = "Không thể kết nối đến máy chủ Backend!";
+            message.className = "error";
+        }
 
     });
 
     // Quên mật khẩu
-    const forgotPassword =
-        document.getElementById("forgotPassword");
+    const forgotPassword = document.getElementById("forgotPassword");
 
-    forgotPassword.addEventListener("click", function (event) {
-
-        event.preventDefault();
-
-        alert(
-            "Chức năng quên mật khẩu sẽ được phát triển sau."
-        );
-
-    });
+    if (forgotPassword) {
+        forgotPassword.addEventListener("click", function (event) {
+            event.preventDefault();
+            alert("Chức năng quên mật khẩu sẽ được phát triển sau.");
+        });
+    }
 
 });

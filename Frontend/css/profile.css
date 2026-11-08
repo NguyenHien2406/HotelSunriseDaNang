@@ -1,0 +1,937 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --navy: #0c294b;
+  --navy2: #143b64;
+  --gold: #e5ad4c;
+  --gold-light: #f6d99e;
+  --ink: #17243a;
+  --muted: #718096;
+  --line: #e7ebf1;
+  --surface: #fff;
+  --bg: #f4f7fb;
+  --shadow: 0 5px 18px rgba(15, 42, 72, 0.08);
+}
+
+body {
+  font-family: "DM Sans", Arial, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  font-size: 15px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   2. HEADER & BRANDING
+   ========================================================================== */
+.site-header {
+  height: 88px;
+  background: linear-gradient(100deg, #071e38, #12365d);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3.2%;
+  gap: 24px;
+  color: #fff;
+  position: relative;
+  z-index: 5;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  color: var(--gold);
+  min-width: 210px;
+}
+
+.brand-mark {
+  width: 55px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  font-size: 29px;
+}
+
+.brand-mark .fa-water {
+  position: absolute;
+  bottom: 0;
+  font-size: 29px;
+}
+
+.brand-name {
+  font-family: "Playfair Display", serif;
+  font-size: 25px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.brand-name small {
+  display: block;
+  font-family: "DM Sans", sans-serif;
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2.1vw, 34px);
+  height: 100%;
+}
+
+.main-nav a {
+  font-size: 14px;
+  white-space: nowrap;
+  transition: 0.2s;
+}
+
+.main-nav a:hover {
+  color: var(--gold);
+}
+
+.main-nav a:first-child {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.account-pill,
+.logout-top {
+  border: 1px solid var(--gold);
+  border-radius: 30px;
+  padding: 11px 15px;
+  color: #fff;
+  background: transparent;
+  font-size: 13px;
+}
+
+.account-pill {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.logout-top {
+  background: var(--gold);
+  color: #17243a;
+  font-weight: 700;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 0;
+  color: white;
+  font-size: 22px;
+}
+
+/* ==========================================================================
+   3. HERO BANNER & LAYOUT STRUCTURE
+   ========================================================================== */
+.page-hero {
+  height: 190px;
+  background: linear-gradient(90deg, rgba(7, 31, 57, 0.83), rgba(7, 31, 57, 0.14)),
+    url("https://images.unsplash.com/photo-1533105079780-92b9be482077?w=1800&auto=format&fit=crop") center 48%/cover;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.hero-content {
+  width: min(1450px, 94%);
+  margin: auto;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+.page-hero h1 {
+  font: 700 clamp(32px, 4vw, 45px) "Playfair Display", serif;
+  margin: 8px 0 4px;
+}
+
+.page-hero p {
+  font: italic 17px "Playfair Display", serif;
+}
+
+.hero-line {
+  display: block;
+  width: 72px;
+  height: 2px;
+  background: var(--gold);
+  margin-top: 17px;
+}
+
+.profile-layout {
+  width: min(1450px, 96%);
+  margin: 24px auto 28px;
+  display: grid;
+  grid-template-columns: 285px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid #edf0f5;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+/* ==========================================================================
+   4. SIDEBAR NAVIGATION
+   ========================================================================== */
+.sidebar {
+  padding: 18px 14px;
+  position: sticky;
+  top: 18px;
+}
+
+.user-summary {
+  text-align: center;
+  padding: 0 5px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.avatar-wrap {
+  width: 142px;
+  height: 142px;
+  margin: 0 auto 13px;
+  position: relative;
+}
+
+.avatar-wrap img,
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #f0f3f8;
+}
+
+.avatar-edit,
+.photo-camera {
+  position: absolute;
+  right: 0;
+  bottom: 3px;
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  border: 3px solid white;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.user-summary h2 {
+  font-size: 20px;
+  margin-bottom: 7px;
+}
+
+.user-summary p {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  overflow-wrap: anywhere;
+}
+
+.profile-nav {
+  display: grid;
+  gap: 6px;
+  padding-top: 16px;
+}
+
+.nav-item {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  border-radius: 9px;
+  padding: 13px 12px;
+  text-align: left;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.nav-item i {
+  width: 20px;
+  text-align: center;
+  color: var(--navy);
+  font-size: 17px;
+}
+
+.nav-item:hover {
+  background: #f5f7fa;
+}
+
+.nav-item.active {
+  background: linear-gradient(100deg, #f7e1b7, #f3d393);
+  color: #14263d;
+}
+
+.nav-logout {
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  margin-top: 8px;
+  padding-top: 19px;
+}
+
+/* ==========================================================================
+   5. CONTENT SECTIONS & FORMS
+   ========================================================================== */
+.content-column {
+  min-width: 0;
+}
+
+.content-section {
+  margin-bottom: 16px;
+}
+
+.personal-card {
+  min-height: 345px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.section-heading > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-heading h2 {
+  font: 700 22px "Playfair Display", serif;
+  color: var(--navy);
+}
+
+.heading-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  background: #eef3f9;
+  color: var(--navy);
+  display: grid;
+  place-items: center;
+  font-size: 17px;
+}
+
+/* BUTTON COMPONENTS */
+.outline-button,
+.light-button,
+.gold-button {
+  border-radius: 25px;
+  padding: 10px 17px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.outline-button {
+  border: 1px solid var(--gold);
+  color: var(--navy);
+  background: white;
+}
+
+.outline-button:hover {
+  background: #fff8eb;
+}
+
+.light-button {
+  border: 1px solid var(--line);
+  background: #f5f7fa;
+  color: #526176;
+}
+
+.gold-button {
+  border: 0;
+  background: linear-gradient(100deg, #edbd66, #e5aa43);
+  color: #14263d;
+}
+
+.gold-button:hover,
+.logout-top:hover {
+  filter: brightness(1.04);
+}
+
+.full-button {
+  width: 100%;
+  height: 44px;
+}
+
+/* PROFILE INFO DISPLAY */
+.personal-content {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: 26px;
+  align-items: center;
+}
+
+.profile-photo {
+  width: 180px;
+  height: 180px;
+  position: relative;
+}
+
+.profile-photo img {
+  border-radius: 15px;
+  border: 0;
+}
+
+.photo-camera {
+  right: -5px;
+  bottom: -5px;
+}
+
+.info-list {
+  display: grid;
+  gap: 18px;
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: minmax(110px, 145px) minmax(0, 1fr);
+  gap: 16px;
+  font-size: 15px;
+}
+
+.info-row span {
+  color: #526176;
+}
+
+.info-row strong {
+  font-weight: 700;
+  color: #17243a;
+  overflow-wrap: anywhere;
+}
+
+/* FORM CONTROLS & SECURITY SECTION */
+.edit-form {
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  margin-top: 22px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.form-grid label,
+.password-form > label {
+  display: grid;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #34445b;
+}
+
+.form-grid input,
+.form-grid select,
+.password-input input {
+  width: 100%;
+  height: 43px;
+  border: 1px solid #dce3ec;
+  border-radius: 9px;
+  padding: 0 12px;
+  outline: none;
+  background: #fff;
+  color: var(--ink);
+}
+
+.form-grid input:focus,
+.form-grid select:focus,
+.password-input input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(229, 173, 76, 0.15);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 17px;
+}
+
+.security-card {
+  max-width: 700px;
+}
+
+.password-form {
+  display: grid;
+  gap: 16px;
+  max-width: 580px;
+}
+
+.password-input {
+  position: relative;
+}
+
+.password-input input {
+  padding-right: 45px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: none;
+  color: #7d899a;
+}
+
+.form-hint,
+.muted-label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   6. BOOKINGS, TABLES & TOAST NOTIFICATIONS
+   ========================================================================== */
+.booking-list {
+  display: grid;
+}
+
+.booking-item {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+
+.booking-item:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.booking-item img {
+  width: 130px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.booking-details h3 {
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.booking-details p {
+  font-size: 12px;
+  color: #65748a;
+  margin-top: 5px;
+}
+
+.booking-details p i {
+  width: 17px;
+  color: var(--navy);
+}
+
+.status {
+  padding: 6px 11px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status.success {
+  background: #d9f7e6;
+  color: #167443;
+}
+
+.status.cancel {
+  background: #e2efff;
+  color: #1761ae;
+}
+
+.status.pending {
+  background: #fff0ce;
+  color: #95620b;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.payment-table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 650px;
+  font-size: 13px;
+}
+
+.payment-table th {
+  text-align: left;
+  color: #718096;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 12px 10px;
+  background: #f8fafc;
+}
+
+.payment-table td {
+  padding: 15px 10px;
+  border-top: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.payment-table td strong {
+  color: var(--navy);
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--muted);
+  padding: 28px 10px;
+}
+
+.toast {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  background: #143b64;
+  color: white;
+  padding: 13px 18px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: 0.25s;
+  z-index: 20;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   7. FOOTER
+   ========================================================================== */
+.site-footer {
+  min-height: 105px;
+  background: linear-gradient(100deg, #071e38, #12365d);
+  color: #fff;
+  padding: 20px 3%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer-brand {
+  min-width: auto;
+}
+
+.footer-brand .brand-mark {
+  width: 48px;
+}
+
+.footer-brand .brand-name {
+  font-size: 20px;
+}
+
+.site-footer > p {
+  font: italic 15px "Playfair Display", serif;
+  color: #f4d9aa;
+}
+
+.social-links {
+  display: flex;
+  gap: 10px;
+}
+
+.social-links a {
+  width: 34px;
+  height: 34px;
+  background: #fff;
+  color: var(--navy);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.site-footer > small {
+  font-size: 11px;
+  color: #e2e8f0;
+}
+
+/* ==========================================================================
+   8. RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================================================== */
+@media (max-width: 1120px) {
+  .site-header {
+    gap: 12px;
+  }
+  .brand {
+    min-width: 175px;
+  }
+  .brand-name {
+    font-size: 21px;
+  }
+  .main-nav {
+    gap: 13px;
+  }
+  .main-nav a {
+    font-size: 12px;
+  }
+  .header-actions {
+    gap: 6px;
+  }
+  .account-pill,
+  .logout-top {
+    padding: 10px;
+    font-size: 11px;
+  }
+  .profile-layout {
+    grid-template-columns: 250px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 850px) {
+  .site-header {
+    height: 76px;
+  }
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 76px;
+    left: 0;
+    right: 0;
+    height: auto;
+    background: #0b2949;
+    padding: 14px 5%;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0;
+  }
+  .main-nav.open {
+    display: flex;
+  }
+  .main-nav a {
+    padding: 12px 0;
+    font-size: 14px;
+  }
+  .header-actions {
+    display: none;
+  }
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    position: static;
+  }
+  .user-summary {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 15px;
+    text-align: left;
+    align-items: center;
+    padding-bottom: 15px;
+  }
+  .avatar-wrap {
+    width: 76px;
+    height: 76px;
+    grid-row: 1 / 3;
+    margin: 0;
+  }
+  .avatar-wrap img {
+    border-width: 2px;
+  }
+  .avatar-edit {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+  .user-summary h2 {
+    align-self: end;
+    font-size: 17px;
+  }
+  .user-summary p {
+    justify-content: flex-start;
+    align-self: start;
+  }
+  .profile-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .nav-logout {
+    border-top: 0;
+    margin-top: 0;
+    padding-top: 13px;
+  }
+  .site-footer {
+    flex-wrap: wrap;
+  }
+  .site-footer > p {
+    order: 3;
+    width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .brand {
+    min-width: 0;
+  }
+  .brand-mark {
+    width: 42px;
+    font-size: 24px;
+  }
+  .brand-name {
+    font-size: 18px;
+  }
+  .brand-name small {
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+  .page-hero {
+    height: 165px;
+  }
+  .page-hero p {
+    font-size: 14px;
+  }
+  .profile-layout {
+    width: 94%;
+    margin-top: 14px;
+  }
+  .card {
+    padding: 17px;
+  }
+  .profile-nav {
+    grid-template-columns: 1fr 1fr;
+  }
+  .nav-item {
+    font-size: 12px;
+    padding: 11px 8px;
+    gap: 8px;
+  }
+  .nav-item i {
+    font-size: 14px;
+  }
+  .section-heading h2 {
+    font-size: 18px;
+  }
+  .section-heading {
+    align-items: flex-start;
+  }
+  .outline-button {
+    padding: 9px 11px;
+    font-size: 12px;
+  }
+  .personal-content {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 20px;
+  }
+  .profile-photo {
+    width: 145px;
+    height: 145px;
+  }
+  .info-list {
+    width: 100%;
+    gap: 14px;
+  }
+  .info-row {
+    grid-template-columns: 105px minmax(0, 1fr);
+    font-size: 13px;
+    gap: 8px;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .booking-item {
+    grid-template-columns: 88px minmax(0, 1fr);
+    gap: 11px;
+  }
+  .booking-item img {
+    width: 88px;
+    height: 75px;
+  }
+  .booking-item > .status {
+    grid-column: 2;
+    justify-self: start;
+  }
+  .booking-details h3 {
+    font-size: 13px;
+  }
+  .booking-details p {
+    font-size: 11px;
+  }
+  .site-footer {
+    justify-content: center;
+    text-align: center;
+  }
+  .site-footer > p {
+    font-size: 13px;
+  }
+  .site-footer > small {
+    width: 100%;
+  }
+}

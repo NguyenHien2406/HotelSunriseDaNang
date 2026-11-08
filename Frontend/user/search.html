@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tìm kiếm phòng - Hotel Sunrise Đà Nẵng</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/profile.css"> <!-- Tận dụng chung bộ CSS layout & biến màu -->
+  <link rel="stylesheet" href="../css/search.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Hotel Sunrise">
+      <span class="brand-mark"><i class="fa-solid fa-sun"></i><i class="fa-solid fa-water"></i></span>
+      <span class="brand-name">SUNRISE<small>ĐÀ NẴNG HOTEL</small></span>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Mở menu"><i class="fa-solid fa-bars"></i></button>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="../../index.html"><i class="fa-solid fa-house"></i> Trang chủ</a>
+      <a href="../../index.html#rooms">Phòng nghỉ</a>
+      <a href="../../index.html#services">Dịch vụ</a>
+      <a href="../../index.html#offers">Ưu đãi</a>
+      <a href="../../index.html#contact">Liên hệ</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="account-pill" href="profile.html"><i class="fa-solid fa-user"></i><span id="headerUserName">Tài khoản</span></a>
+      <button class="logout-top" id="navLogoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="page-hero">
+    <div class="hero-content">
+      <span class="eyebrow">HOTEL SUNRISE ĐÀ NẴNG</span>
+      <h1>Tìm kiếm & Lọc phòng</h1>
+      <p>Lựa chọn không gian nghỉ dưỡng hoàn hảo cho kỳ nghỉ của bạn tại Mỹ Khê</p>
+      <span class="hero-line"></span>
+    </div>
+  </section>
+
+  <!-- Main Search & Filter Layout -->
+  <main class="search-layout container">
+    <!-- Cột Bộ lọc (Sidebar Filter) -->
+    <aside class="filter-sidebar card">
+      <div class="section-heading" style="margin-bottom: 15px;">
+        <h2>Bộ lọc tìm kiếm</h2>
+        <button type="button" class="outline-button" id="resetFilterBtn" style="padding: 5px 10px; font-size: 12px;">Đặt lại</button>
+      </div>
+
+      <form id="filterForm" class="filter-form">
+        <!-- Lọc theo ngày -->
+        <div class="filter-group">
+          <label><i class="fa-regular fa-calendar"></i> Ngày nhận phòng</label>
+          <input type="date" id="filterCheckin" required>
+        </div>
+        <div class="filter-group">
+          <label><i class="fa-regular fa-calendar-check"></i> Ngày trả phòng</label>
+          <input type="date" id="filterCheckout" required>
+        </div>
+
+        <!-- Lọc theo số khách -->
+        <div class="filter-group">
+          <label><i class="fa-solid fa-users"></i> Số lượng khách</label>
+          <div class="filter-grid-2">
+            <div>
+              <small style="color:var(--muted)">Người lớn</small>
+              <input type="number" id="filterAdults" value="2" min="1" max="10">
+            </div>
+            <div>
+              <small style="color:var(--muted)">Trẻ em</small>
+              <input type="number" id="filterChildren" value="0" min="0" max="5">
+            </div>
+          </div>
+        </div>
+
+        <!-- Lọc theo khoảng giá -->
+        <div class="filter-group">
+          <label><i class="fa-solid fa-tag"></i> Khoảng giá (VNĐ/đêm)</label>
+          <div class="price-slider-wrap">
+            <input type="range" id="priceRange" min="500000" max="5000000" step="100000" value="5000000">
+            <div class="price-range-label">
+              <span>500.000đ</span>
+              <strong id="priceRangeVal" style="color:var(--navy)">5.000.000đ</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lọc theo hạng phòng -->
+        <div class="filter-group">
+          <label><i class="fa-solid fa-bed"></i> Hạng phòng</label>
+          <div class="checkbox-list">
+            <label><input type="checkbox" name="roomType" value="Tiêu chuẩn" checked> Phòng Tiêu chuẩn</label>
+            <label><input type="checkbox" name="roomType" value="Cao cấp" checked> Phòng Cao cấp</label>
+            <label><input type="checkbox" name="roomType" value="Deluxe" checked> Phòng Deluxe</label>
+            <label><input type="checkbox" name="roomType" value="Suite" checked> Phòng Suite</label>
+          </div>
+        </div>
+
+        <!-- Lọc theo tiện ích -->
+        <div class="filter-group">
+          <label><i class="fa-solid fa-star"></i> Tiện ích nổi bật</label>
+          <div class="checkbox-list">
+            <label><input type="checkbox" name="amenity" value="ocean_view"> Hướng biển Mỹ Khê</label>
+            <label><input type="checkbox" name="amenity" value="bathtub"> Bồn tắm cao cấp</label>
+            <label><input type="checkbox" name="amenity" value="breakfast"> Miễn phí ăn sáng</label>
+            <label><input type="checkbox" name="amenity" value="balcony"> Ban công riêng</label>
+          </div>
+        </div>
+
+        <button type="submit" class="gold-button full-button"><i class="fa-solid fa-magnifying-glass"></i> Áp dụng bộ lọc</button>
+      </form>
+    </aside>
+
+    <!-- Cột Kết quả tìm kiếm -->
+    <section class="results-column">
+      <div class="results-header card" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 15px 22px;">
+        <p id="resultCountText" style="font-weight: 600; color: var(--navy);">Tìm thấy <strong>4</strong> phòng phù hợp</p>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <label style="font-size: 13px; font-weight: 600; color: var(--muted);">Sắp xếp:</label>
+          <select id="sortSelect" style="padding: 8px 12px; border: 1px solid #dce3ec; border-radius: 8px; outline: none; background: white;">
+            <option value="default">Mặc định</option>
+            <option value="price-asc">Giá: Thấp đến Cao</option>
+            <option value="price-desc">Giá: Cao xuống Thấp</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Danh sách phòng kết quả -->
+      <div class="room-search-list" id="roomSearchList">
+        <!-- Render bằng JavaScript -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="../../index.html">
+      <span class="brand-mark"><i class="fa-solid fa-sun"></i><i class="fa-solid fa-water"></i></span>
+      <span class="brand-name">SUNRISE<small>ĐÀ NẴNG HOTEL</small></span>
+    </a>
+    <p>Nghỉ dưỡng đẳng cấp – Trải nghiệm trọn vẹn tại Đà Nẵng</p>
+    <div class="social-links">
+      <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="#" aria-label="Youtube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+    <small>© 2026 Hotel Sunrise Đà Nẵng. All rights reserved.</small>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="../js/search.js" defer></script>
+</body>
+</html>
