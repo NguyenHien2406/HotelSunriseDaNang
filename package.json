@@ -1,0 +1,30 @@
+{
+  "name": "ptda_websunrisedanang",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">\r   <b>Hệ thống Quản lý và Đặt phòng Khách sạn ven biển Đà Nẵng</b>\r </p>",
+  "main": "index.js",
+  "scripts": {
+    "start": "node Backend/src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NguyenHien2406/HotelSunriseDaNang.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/NguyenHien2406/HotelSunriseDaNang/issues"
+  },
+  "homepage": "https://github.com/NguyenHien2406/HotelSunriseDaNang#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.24.6"
+  }
+}

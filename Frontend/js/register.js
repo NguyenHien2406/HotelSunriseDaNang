@@ -1,4 +1,3 @@
-
 const registerForm = document.getElementById("registerForm");
 const message = document.getElementById("message");
 
@@ -46,7 +45,7 @@ document.querySelectorAll(".toggle-password")
 // XỬ LÝ ĐĂNG KÝ
 // =========================
 
-registerForm.addEventListener("submit", function (event) {
+registerForm.addEventListener("submit", async function (event) {
 
     event.preventDefault();
 
@@ -74,52 +73,67 @@ registerForm.addEventListener("submit", function (event) {
 
     // Kiểm tra họ tên
     if (fullname.length < 2) {
-
-        message.textContent =
-            "Vui lòng nhập họ tên hợp lệ!";
-
+        message.textContent = "Vui lòng nhập họ tên hợp lệ!";
         return;
     }
 
     // Kiểm tra số điện thoại
     if (!/^(0[0-9]{9,10})$/.test(phone)) {
-
-        message.textContent =
-            "Số điện thoại không hợp lệ!";
-
+        message.textContent = "Số điện thoại không hợp lệ!";
         return;
     }
 
     // Kiểm tra mật khẩu
     if (password.length < 8) {
-
-        message.textContent =
-            "Mật khẩu phải có ít nhất 8 ký tự!";
-
+        message.textContent = "Mật khẩu phải có ít nhất 8 ký tự!";
         return;
     }
 
     // Kiểm tra xác nhận mật khẩu
     if (password !== confirmPassword) {
-
-        message.textContent =
-            "Mật khẩu xác nhận không khớp!";
-
+        message.textContent = "Mật khẩu xác nhận không khớp!";
         return;
     }
 
-    // Dữ liệu hợp lệ
-    message.style.color = "#15803d";
+    // Tạo username tự động từ email (lấy phần trước dấu @ kèm chuỗi ngẫu nhiên để tránh trùng)
+    const username = email.split('@')[0] + "_" + Math.floor(Math.random() * 1000);
 
-    message.textContent =
-        "Thông tin hợp lệ! Có thể đăng ký tài khoản.";
+    try {
+        message.style.color = "#2563eb";
+        message.textContent = "Đang kết nối đến máy chủ...";
 
-    console.log({
-        fullname,
-        email,
-        phone
-    });
+        const response = await fetch('http://localhost:5000/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username,
+                fullname,
+                email,
+                phone,
+                password
+            })
+        });
 
-    // TODO:
-    // Gửi dữ liệu lên API Backend
+        const data = await response.json();
+
+        if (response.ok) {
+            message.style.color = "#15803d";
+            message.textContent = "Đăng ký thành công! Đang chuyển hướng đến trang đăng nhập...";
+
+            // Chuyển hướng sang trang login sau 1.5 giây
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1500);
+        } else {
+            message.style.color = "#dc2626";
+            message.textContent = data.message || "Đăng ký thất bại, vui lòng thử lại!";
+        }
+
+    } catch (error) {
+        console.error("Lỗi kết nối:", error);
+        message.style.color = "#dc2626";
+        message.textContent = "Không thể kết nối đến máy chủ Backend!";
+    }
 });

@@ -1,0 +1,4 @@
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process //câu lệnh bỏ qua chính sách bảo mật windown
+npm init -y // cài đặt package.json
+npm install mysql2 express dotenv cors bcryptjs jsonwebtoken // cài đặt thư viện mysql2
+npm start // khở tạo sever http://localhost:5000/

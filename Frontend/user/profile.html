@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hồ sơ người dùng - Hotel Sunrise Đà Nẵng</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/profile.css">
+  <script src="../js/profile.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Hotel Sunrise">
+      <span class="brand-mark"><i class="fa-solid fa-sun"></i><i class="fa-solid fa-water"></i></span>
+      <span class="brand-name">SUNRISE<small>ĐÀ NẴNG HOTEL</small></span>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Mở menu"><i class="fa-solid fa-bars"></i></button>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="../../index.html"><i class="fa-solid fa-house"></i> Trang chủ</a>
+      <a href="#">Giới thiệu</a>
+      <a href="#">Phòng nghỉ <i class="fa-solid fa-chevron-down"></i></a>
+      <a href="#">Ưu đãi</a>
+      <a href="#">Tin tức</a>
+      <a href="#">Liên hệ</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="account-pill" href="profile.html"><i class="fa-solid fa-user"></i><span id="headerUserName">Tài khoản</span></a>
+      <button class="logout-top" data-logout><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="hero-content">
+      <span class="eyebrow">HOTEL SUNRISE ĐÀ NẴNG</span>
+      <h1>Hồ sơ người dùng</h1>
+      <p>Quản lý thông tin tài khoản và trải nghiệm nghỉ dưỡng của bạn</p>
+      <span class="hero-line"></span>
+    </div>
+  </section>
+
+  <main class="profile-layout">
+    <aside class="sidebar card">
+      <div class="user-summary">
+        <div class="avatar-wrap">
+          <img id="sidebarAvatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&auto=format&fit=crop" alt="Ảnh đại diện">
+          <label class="avatar-edit" for="avatarInput" title="Đổi ảnh đại diện"><i class="fa-solid fa-camera"></i></label>
+          <input type="file" id="avatarInput" accept="image/*" hidden>
+        </div>
+        <h2 id="sidebarName">Nguyễn Văn Hiến</h2>
+        <p><i class="fa-regular fa-envelope"></i><span id="sidebarEmail">hiennguyen@gmail.com</span></p>
+      </div>
+
+      <nav class="profile-nav" aria-label="Danh mục hồ sơ">
+        <button class="nav-item active" data-section="personal"><i class="fa-solid fa-user"></i> Thông tin cá nhân</button>
+        <button class="nav-item" data-section="bookings"><i class="fa-regular fa-calendar-check"></i> Lịch sử đặt phòng</button>
+        <button class="nav-item" data-section="payments"><i class="fa-regular fa-credit-card"></i> Lịch sử thanh toán</button>
+        <button class="nav-item" data-section="wallet"><i class="fa-solid fa-wallet"></i> Ví & Nạp tiền</button>
+        <button class="nav-item" data-section="security"><i class="fa-solid fa-lock"></i> Đổi mật khẩu</button>
+        <button class="nav-item nav-logout" data-logout><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</button>
+      </nav>
+    </aside>
+
+    <div class="content-column">
+      <!-- Tab 1: Thông tin cá nhân -->
+      <section class="content-section" id="section-personal">
+        <div class="card personal-card">
+          <div class="section-heading">
+            <div><span class="heading-icon"><i class="fa-solid fa-user"></i></span><h2>Thông tin cá nhân</h2></div>
+            <button class="outline-button" id="editProfileBtn"><i class="fa-solid fa-pen"></i> Chỉnh sửa</button>
+          </div>
+
+          <div class="personal-content">
+            <div class="profile-photo">
+              <img id="mainAvatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&auto=format&fit=crop" alt="Ảnh hồ sơ người dùng">
+              <label for="avatarInput" class="photo-camera"><i class="fa-solid fa-camera"></i></label>
+            </div>
+            <div class="info-list" id="profileInfo">
+              <div class="info-row"><span>Họ và tên</span><strong id="infoName">Nguyễn Văn Hiến</strong></div>
+              <div class="info-row"><span>Email</span><strong id="infoEmail">hiennguyen@gmail.com</strong></div>
+              <div class="info-row"><span>Số điện thoại</span><strong id="infoPhone">0987 654 321</strong></div>
+              <div class="info-row"><span>Ngày sinh</span><strong id="infoBirthday">14/06/2006</strong></div>
+              <div class="info-row"><span>Giới tính</span><strong id="infoGender">Nam</strong></div>
+              <div class="info-row"><span>Địa chỉ</span><strong id="infoAddress">Đà Nẵng, Việt Nam</strong></div>
+            </div>
+          </div>
+
+          <form class="edit-form hidden" id="editProfileForm">
+            <div class="form-grid">
+              <label>Họ và tên<input name="fullName" type="text" required maxlength="80"></label>
+              <label>Email<input name="email" type="email" required></label>
+              <label>Số điện thoại<input name="phone" type="tel" maxlength="20"></label>
+              <label>Ngày sinh<input name="birthday" type="date"></label>
+              <label>Giới tính
+                <select name="gender"><option value="Nam">Nam</option><option value="Nữ">Nữ</option><option value="Khác">Khác</option></select>
+              </label>
+              <label>Địa chỉ<input name="address" type="text" maxlength="150"></label>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="light-button" id="cancelEditBtn">Hủy</button>
+              <button type="submit" class="gold-button"><i class="fa-solid fa-floppy-disk"></i> Lưu thay đổi</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Tab 2: Lịch sử đặt phòng -->
+      <section class="content-section" id="section-bookings" hidden>
+        <div class="card">
+          <div class="section-heading">
+            <div><span class="heading-icon"><i class="fa-solid fa-bed"></i></span><h2>Lịch sử đặt phòng</h2></div>
+            <span class="muted-label">Các đặt phòng gần đây</span>
+          </div>
+          <div class="booking-list" id="bookingList"></div>
+        </div>
+      </section>
+
+      <!-- Tab 3: Lịch sử thanh toán chung -->
+      <section class="content-section" id="section-payments" hidden>
+        <div class="card">
+          <div class="section-heading">
+            <div><span class="heading-icon"><i class="fa-regular fa-credit-card"></i></span><h2>Lịch sử thanh toán</h2></div>
+            <span class="muted-label">Giao dịch gần đây</span>
+          </div>
+          <div class="table-wrap">
+            <table class="payment-table">
+              <thead><tr><th>Mã giao dịch</th><th>Nội dung</th><th>Số tiền</th><th>Ngày</th><th>Trạng thái</th></tr></thead>
+              <tbody id="paymentTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab 4: Ví điện tử & Nạp tiền giả lập -->
+      <section class="content-section" id="section-wallet" hidden>
+        <div class="card">
+          <div class="section-heading">
+            <div><span class="heading-icon"><i class="fa-solid fa-wallet"></i></span><h2>Ví điện tử Sunrise</h2></div>
+            <span class="muted-label">Thanh toán nhanh chóng, an toàn</span>
+          </div>
+
+          <div style="background: linear-gradient(100deg, #071e38, #12365d); color: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+            <div>
+              <p style="font-size: 13px; color: #f4d9aa; margin-bottom: 5px;">SỐ DƯ KHẢ DỤNG</p>
+              <h3 id="walletBalanceDisplay" style="font-size: 32px; font-family: 'Playfair Display', serif;">0 đ</h3>
+            </div>
+            <button class="gold-button" id="openTopupModalBtn"><i class="fa-solid fa-plus-circle"></i> Nạp tiền vào ví</button>
+          </div>
+
+          <h3 style="font-size: 18px; margin-bottom: 15px; color: var(--navy);">Lịch sử giao dịch ví</h3>
+          <div class="table-wrap">
+            <table class="payment-table">
+              <thead>
+                <tr><th>Mã GD</th><th>Nội dung</th><th>Số tiền</th><th>Thời gian</th><th>Trạng thái</th></tr>
+              </thead>
+              <tbody id="walletHistoryBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Modal Nạp Tiền Giả Lập -->
+        <div id="topupModal" style="position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 100;">
+          <div class="card" style="width: 100%; max-width: 400px; background: white;">
+            <div class="section-heading">
+              <h2>Nạp tiền giả lập</h2>
+              <button type="button" class="outline-button" id="closeTopupModal" style="padding: 5px 10px;">✕</button>
+            </div>
+            <form id="topupForm" style="display: grid; gap: 15px;">
+              <label style="display: grid; gap: 5px; font-weight: 700; font-size: 13px;">Chọn nhanh số tiền:
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 5px;">
+                  <button type="button" class="outline-button preset-amount" data-amount="100000">100k</button>
+                  <button type="button" class="outline-button preset-amount" data-amount="500000">500k</button>
+                  <button type="button" class="outline-button preset-amount" data-amount="1000000">1 Triệu</button>
+                </div>
+              </label>
+              <label style="display: grid; gap: 5px; font-weight: 700; font-size: 13px;">Hoặc nhập số tiền (VNĐ):
+                <input type="number" id="topupAmountInput" placeholder="VD: 200000" min="10000" step="10000" required style="height: 43px; padding: 0 12px; border: 1px solid #dce3ec; border-radius: 9px; outline: none;">
+              </label>
+              <label style="display: grid; gap: 5px; font-weight: 700; font-size: 13px;">Cổng thanh toán giả lập:
+                <select id="topupMethod" style="height: 43px; padding: 0 12px; border: 1px solid #dce3ec; border-radius: 9px; outline: none; background: #fff;">
+                  <option value="Chuyển khoản Ngân hàng">Chuyển khoản Ngân hàng (VietQR)</option>
+                  <option value="Ví MoMo">Ví MoMo (Quét mã QR)</option>
+                  <option value="VNPay">VNPay Sandbox</option>
+                </select>
+              </label>
+              <button type="submit" class="gold-button full-button" style="margin-top: 10px;">Xác nhận nạp tiền</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab 5: Đổi mật khẩu -->
+      <section class="content-section" id="section-security" hidden>
+        <div class="card security-card">
+          <div class="section-heading">
+            <div><span class="heading-icon"><i class="fa-solid fa-lock"></i></span><h2>Đổi mật khẩu</h2></div>
+          </div>
+          <form id="passwordForm" class="password-form">
+            <label>Mật khẩu hiện tại
+              <div class="password-input"><input type="password" name="currentPassword" placeholder="Nhập mật khẩu hiện tại" required><button type="button" class="toggle-password" aria-label="Hiện mật khẩu"><i class="fa-regular fa-eye"></i></button></div>
+            </label>
+            <label>Mật khẩu mới
+              <div class="password-input"><input type="password" name="newPassword" placeholder="Nhập mật khẩu mới" minlength="8" required><button type="button" class="toggle-password" aria-label="Hiện mật khẩu"><i class="fa-regular fa-eye"></i></button></div>
+            </label>
+            <label>Xác nhận mật khẩu mới
+              <div class="password-input"><input type="password" name="confirmPassword" placeholder="Nhập lại mật khẩu mới" minlength="8" required><button type="button" class="toggle-password" aria-label="Hiện mật khẩu"><i class="fa-regular fa-eye"></i></button></div>
+            </label>
+            <p class="form-hint">Mật khẩu mới nên có ít nhất 8 ký tự.</p>
+            <button class="gold-button full-button" type="submit"><i class="fa-solid fa-lock"></i> Đổi mật khẩu</button>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="../../index.html">
+      <span class="brand-mark"><i class="fa-solid fa-sun"></i><i class="fa-solid fa-water"></i></span>
+      <span class="brand-name">SUNRISE<small>ĐÀ NẴNG HOTEL</small></span>
+    </a>
+    <p>Nghỉ dưỡng đẳng cấp – Trải nghiệm trọn vẹn tại Đà Nẵng</p>
+    <div class="social-links"><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" aria-label="Youtube"><i class="fa-brands fa-youtube"></i></a><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></div>
+    <small>© 2026 Hotel Sunrise Đà Nẵng. All rights reserved.</small>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
