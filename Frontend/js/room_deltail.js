@@ -1,8 +1,31 @@
 // =========================================
-// SUNRISE HOTEL - ROOM DETAIL JAVASCRIPT
+// SUNRISE HOTEL - ROOM DETAIL JAVASCRIPT (MYSQL API & AUTH)
 // =========================================
 
-// 1. MENU MOBILE
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Kiểm tra và đồng bộ trạng thái đăng nhập trên Header
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+
+    if (token && user.full_name) {
+        // Tìm vùng chứa nút đăng nhập/đăng ký trên header để thay thế bằng thông tin tài khoản
+        const authButtons = document.querySelector(".header-right, .nav-right, .auth-buttons, .header-actions");
+        if (authButtons) {
+            authButtons.innerHTML = `
+                <a href="profile.html" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--navy, #0b2545); font-weight: 600;">
+                    <i class="fa-solid fa-user-circle" style="font-size: 20px;"></i>
+                    <span>${user.full_name}</span>
+                </a>
+            `;
+        }
+    }
+
+    // Khởi tạo gallery và tính tiền mặc định
+    showImage(0);
+    calculatePrice();
+});
+
+// 2. MENU MOBILE
 const menuToggle = document.getElementById("menuToggle");
 const navMenu = document.getElementById("navMenu");
 
@@ -12,11 +35,11 @@ if (menuToggle && navMenu) {
     });
 }
 
-// 2. ĐỌC THAM SỐ LOẠI PHÒNG TỪ URL VÀ CẬP NHẬT DỮ LIỆU ĐỘNG
+// 3. ĐỌC THAM SỐ LOẠI PHÒNG TỪ URL VÀ CẬP NHẬT DỮ LIỆU ĐỘNG
 const urlParams = new URLSearchParams(window.location.search);
 const roomType = urlParams.get("type") || "deluxe"; // Mặc định là deluxe nếu không có
 
-// Dữ liệu chi tiết cho từng loại phòng (Đồng bộ chuẩn 100% về giá, thông số và ảnh)
+// Dữ liệu chi tiết cho từng loại phòng
 const roomsDataMap = {
     standard: {
         category: "PHÒNG TIÊU CHUẨN",
@@ -76,23 +99,18 @@ const currentRoom = roomsDataMap[roomType] || roomsDataMap["deluxe"];
 const galleryImages = currentRoom.images;
 const roomPrice = currentRoom.price;
 
-// Gán thông tin động lên toàn bộ giao diện trang chi tiết
+// Gán thông tin động lên giao diện
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Cập nhật tiêu đề & breadcrumb
     const categoryEl = document.querySelector(".room-category");
     const titleEl = document.querySelector(".room-information h2");
     const descEl = document.querySelector(".room-short-description");
     const breadcrumbSpan = document.querySelector(".breadcrumb span");
-    
-    // Thẻ nhỏ phía trên gallery (ví dụ: góc trái ảnh)
-    const galleryTopLabel = document.querySelector(".gallery-section .room-label-tag, .gallery-section > div:first-child span");
     
     if (categoryEl) categoryEl.textContent = currentRoom.category;
     if (titleEl) titleEl.textContent = currentRoom.name;
     if (descEl) descEl.textContent = currentRoom.desc;
     if (breadcrumbSpan) breadcrumbSpan.textContent = currentRoom.name;
 
-    // 2. Cập nhật thông số kỹ thuật (Diện tích, Giường, Sức chứa)
     const specsItems = document.querySelectorAll(".room-specs .spec-item");
     if (specsItems.length >= 3) {
         specsItems[0].querySelector("strong").textContent = currentRoom.specs.size;
@@ -100,20 +118,15 @@ document.addEventListener("DOMContentLoaded", () => {
         specsItems[2].querySelector("strong").textContent = currentRoom.specs.capacity;
     }
 
-    // 3. Cập nhật giá tiền hiển thị ở sidebar đặt phòng
     const priceDisplay = document.querySelector(".price-summary strong");
     if (priceDisplay) priceDisplay.textContent = roomPrice.toLocaleString("vi-VN") + "đ";
 
     const mobilePrice = document.querySelector(".room-price-mobile strong");
     if (mobilePrice) mobilePrice.innerHTML = `${roomPrice.toLocaleString("vi-VN")}đ <small>/ đêm</small>`;
-
-    showImage(0);
-    calculatePrice();
 });
 
-// 3. IMAGE GALLERY
+// 4. IMAGE GALLERY
 let currentImageIndex = 0;
-
 const mainImage = document.getElementById("mainImage");
 const thumbnails = document.querySelectorAll(".thumbnail");
 const imageCounter = document.getElementById("imageCounter");
@@ -123,7 +136,9 @@ function showImage(index) {
     if (index >= galleryImages.length) index = 0;
 
     currentImageIndex = index;
-    mainImage.src = galleryImages[index].main;
+    if (mainImage && galleryImages[index]) {
+        mainImage.src = galleryImages[index].main;
+    }
 
     thumbnails.forEach((thumbnail, i) => {
         if (galleryImages[i]) {
@@ -141,11 +156,10 @@ function showImage(index) {
 
     const lightboxImage = document.getElementById("lightboxImage");
     const lightboxCounter = document.getElementById("lightboxCounter");
-    if (lightboxImage) lightboxImage.src = galleryImages[index].main;
+    if (lightboxImage && galleryImages[index]) lightboxImage.src = galleryImages[index].main;
     if (lightboxCounter) lightboxCounter.textContent = `${index + 1} / ${galleryImages.length}`;
 }
 
-// Click thumbnail
 thumbnails.forEach((thumbnail, index) => {
     thumbnail.addEventListener("click", () => {
         if (galleryImages[index]) showImage(index);
@@ -157,7 +171,7 @@ const nextBtn = document.getElementById("nextImage");
 if (prevBtn) prevBtn.addEventListener("click", () => showImage(currentImageIndex - 1));
 if (nextBtn) nextBtn.addEventListener("click", () => showImage(currentImageIndex + 1));
 
-// 4. LIGHTBOX
+// 5. LIGHTBOX
 const lightbox = document.getElementById("lightbox");
 const zoomBtn = document.getElementById("zoomImage");
 const closeLightboxBtn = document.getElementById("closeLightbox");
@@ -197,11 +211,10 @@ document.addEventListener("keydown", (event) => {
     if (event.key === "ArrowRight") showImage(currentImageIndex + 1);
 });
 
-// 5. GUEST SELECTOR
+// 6. GUEST SELECTOR
 const guestTrigger = document.getElementById("guestTrigger");
 const guestDropdown = document.getElementById("guestDropdown");
 const guestDone = document.getElementById("guestDone");
-
 const guestData = { adults: 2, children: 0, rooms: 1 };
 
 if (guestTrigger && guestDropdown) {
@@ -252,7 +265,7 @@ function updateGuestSummary() {
     }
 }
 
-// 6. DATE PICKER AND PRICE CALCULATION
+// 7. DATE PICKER AND PRICE CALCULATION
 const checkIn = document.getElementById("checkIn");
 const checkOut = document.getElementById("checkOut");
 
@@ -326,10 +339,17 @@ if (checkOut) {
     checkOut.addEventListener("change", calculatePrice);
 }
 
-// 7. BOOKING BUTTON
+// 8. BOOKING BUTTON - Gửi trực tiếp API Backend lưu vào Database MySQL
 const bookNowBtn = document.getElementById("bookNow");
 if (bookNowBtn) {
-    bookNowBtn.addEventListener("click", () => {
+    bookNowBtn.addEventListener("click", async () => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            alert("Vui lòng đăng nhập trước khi đặt phòng!");
+            window.location.href = "../login.html";
+            return;
+        }
+
         if (!checkIn.value || !checkOut.value) {
             alert("Vui lòng chọn ngày nhận phòng và trả phòng!");
             return;
@@ -343,19 +363,40 @@ if (bookNowBtn) {
         const startDate = new Date(checkIn.value + "T00:00:00");
         const endDate = new Date(checkOut.value + "T00:00:00");
         const nights = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24));
+        const totalPriceValue = roomPrice * guestData.rooms * nights;
 
-        const bookingInfo = {
+        const bookingData = {
             roomName: currentRoom.name,
-            roomPrice: roomPrice,
+            image: currentRoom.images[0].main,
             checkIn: checkIn.value,
             checkOut: checkOut.value,
             adults: guestData.adults,
             children: guestData.children,
             rooms: guestData.rooms,
-            totalPrice: roomPrice * guestData.rooms * nights
+            totalPrice: totalPriceValue
         };
 
-        const params = new URLSearchParams(bookingInfo);
-        window.location.href = `booking.html?${params.toString()}`;
+        try {
+            const response = await fetch('http://localhost:5000/api/bookings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(bookingData)
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                alert("Đặt phòng thành công! Chuyển hướng đến lịch sử đặt phòng...");
+                window.location.href = "my_booking.html";
+            } else {
+                alert(result.message || "Đặt phòng thất bại!");
+            }
+        } catch (error) {
+            console.error("Lỗi kết nối đặt phòng:", error);
+            alert("Không thể kết nối đến máy chủ.");
+        }
     });
 }

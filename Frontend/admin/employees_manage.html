@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Nhân viên - Hotel Sunrise Đà Nẵng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/admin_common.css">
+</head>
+<body>
+
+    <aside>
+        <div class="sidebar-brand">
+            <i class="fa-solid fa-hotel" style="font-size: 28px; color: var(--accent-gold);"></i>
+            <h2>SUNRISE</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html"><i class="fa-solid fa-chart-pie"></i> Tổng quan</a></li>
+            <li><a href="room_manage.html"><i class="fa-solid fa-door-closed"></i> Quản lý phòng</a></li>
+            <li><a href="bookings_manage.html"><i class="fa-solid fa-calendar-check"></i> Quản lý đặt phòng</a></li>
+            <li><a href="customers_manage.html"><i class="fa-solid fa-users"></i> Quản lý khách hàng</a></li>
+            <li class="active"><a href="employees_manage.html"><i class="fa-solid fa-user-tie"></i> Quản lý nhân viên</a></li>
+            <li><a href="invoices_manage.html"><i class="fa-solid fa-file-invoice-dollar"></i> Quản lý hóa đơn</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <button class="btn-logout" onclick="logoutAdmin()">
+                <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+            </button>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header>
+            <div class="header-title">
+                <h1>Quản lý Nhân sự</h1>
+                <p>Phân quyền và quản lý thông tin nhân viên khách sạn</p>
+            </div>
+            <div class="header-actions-right">
+                <button class="btn-primary" onclick="alert('Mở form thêm nhân viên mới')">
+                    <i class="fa-solid fa-user-plus"></i> Thêm nhân viên
+                </button>
+            </div>
+        </header>
+
+        <div class="admin-body">
+            <div class="filter-card">
+                <div class="search-box">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Tìm theo mã NV, tên nhân viên...">
+                </div>
+                <div class="filter-selects">
+                    <select>
+                        <option value="">Tất cả bộ phận</option>
+                        <option value="reception">Lễ tân</option>
+                        <option value="housekeeping">Buồng phòng</option>
+                        <option value="accounting">Kế toán</option>
+                        <option value="manager">Quản lý</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mã NV</th>
+                            <th>Họ và tên</th>
+                            <th>Chức vụ / Bộ phận</th>
+                            <th>Số điện thoại</th>
+                            <th>Ca làm việc</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>#NV-01</strong></td>
+                            <td>Phạm Hoàng Nam</td>
+                            <td>Trưởng bộ phận Lễ tân</td>
+                            <td>0905 888 999</td>
+                            <td>Ca Sáng (06:00 - 14:00)</td>
+                            <td><span class="status-badge status-green">Đang làm việc</span></td>
+                            <td>
+                                <button class="btn-action btn-edit" title="Sửa"><i class="fa-solid fa-pen"></i></button>
+                                <button class="btn-action btn-delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#NV-02</strong></td>
+                            <td>Võ Thị Thu Hà</td>
+                            <td>Nhân viên Kế toán</td>
+                            <td>0914 555 666</td>
+                            <td>Hành chính (08:00 - 17:00)</td>
+                            <td><span class="status-badge status-green">Đang làm việc</span></td>
+                            <td>
+                                <button class="btn-action btn-edit" title="Sửa"><i class="fa-solid fa-pen"></i></button>
+                                <button class="btn-action btn-delete" title="Xóa"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/admin_common.js"></script>
+</body>
+</html>

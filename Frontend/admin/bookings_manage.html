@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Đặt phòng - Hotel Sunrise Đà Nẵng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/admin_common.css">
+</head>
+<body>
+
+    <aside>
+        <div class="sidebar-brand">
+            <i class="fa-solid fa-hotel" style="font-size: 28px; color: var(--accent-gold);"></i>
+            <h2>SUNRISE</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html"><i class="fa-solid fa-chart-pie"></i> Tổng quan</a></li>
+            <li><a href="room_manage.html"><i class="fa-solid fa-door-closed"></i> Quản lý phòng</a></li>
+            <li class="active"><a href="bookings_manage.html"><i class="fa-solid fa-calendar-check"></i> Quản lý đặt phòng</a></li>
+            <li><a href="customers_manage.html"><i class="fa-solid fa-users"></i> Quản lý khách hàng</a></li>
+            <li><a href="employees_manage.html"><i class="fa-solid fa-user-tie"></i> Quản lý nhân viên</a></li>
+            <li><a href="invoices_manage.html"><i class="fa-solid fa-file-invoice-dollar"></i> Quản lý hóa đơn</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <button class="btn-logout" onclick="logoutAdmin()">
+                <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+            </button>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header>
+            <div class="header-title">
+                <h1>Quản lý Đặt phòng</h1>
+                <p>Theo dõi, xác nhận check-in/check-out và hủy đơn đặt phòng</p>
+            </div>
+            <div class="header-actions-right">
+                <button class="btn-primary" onclick="alert('Mở form tạo đơn đặt phòng tại quầy')">
+                    <i class="fa-solid fa-plus"></i> Tạo đặt phòng
+                </button>
+            </div>
+        </header>
+
+        <div class="admin-body">
+            <div class="filter-card">
+                <div class="search-box">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Tìm theo mã đơn (#SR-...), tên khách hàng...">
+                </div>
+                <div class="filter-selects">
+                    <select>
+                        <option value="">Tất cả trạng thái</option>
+                        <option value="pending">Chờ thanh toán</option>
+                        <option value="paid">Đã thanh toán</option>
+                        <option value="checked_in">Đang ở</option>
+                        <option value="cancelled">Đã hủy</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mã đơn</th>
+                            <th>Khách hàng</th>
+                            <th>Phòng</th>
+                            <th>Nhận - Trả phòng</th>
+                            <th>Tổng tiền</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>#SR-89069</strong></td>
+                            <td>Nguyễn Văn A<br><small style="color: var(--text-muted);">0905 123 456</small></td>
+                            <td>Phòng Deluxe Biển</td>
+                            <td>15/11/2026 - 17/11/2026</td>
+                            <td><strong>3.200.000đ</strong></td>
+                            <td><span class="status-badge status-green">Đã thanh toán</span></td>
+                            <td>
+                                <button class="btn-action btn-edit" title="Xác nhận nhận phòng"><i class="fa-solid fa-check"></i></button>
+                                <button class="btn-action btn-delete" title="Hủy đơn"><i class="fa-solid fa-xmark"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#SR-89070</strong></td>
+                            <td>Trần Thị B<br><small style="color: var(--text-muted);">0912 987 654</small></td>
+                            <td>Phòng Tiêu Chuẩn</td>
+                            <td>16/11/2026 - 17/11/2026</td>
+                            <td><strong>850.000đ</strong></td>
+                            <td><span class="status-badge status-yellow">Chờ thanh toán</span></td>
+                            <td>
+                                <button class="btn-action btn-edit" title="Xác nhận"><i class="fa-solid fa-check"></i></button>
+                                <button class="btn-action btn-delete" title="Hủy đơn"><i class="fa-solid fa-xmark"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/admin_common.js"></script>
+</body>
+</html>

@@ -88,21 +88,34 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.json();
 
             if (response.ok) {
-                message.textContent = "Đăng nhập thành công! Đang chuyển hướng...";
-                message.className = "success";
+                    message.textContent = "Đăng nhập thành công! Đang chuyển hướng...";
+                    message.className = "success";
 
-                // Lưu JWT Token và thông tin user vào localStorage
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('user', JSON.stringify(data.user));
+                    // --- QUAN TRỌNG: KIỂM TRA ĐỔI TÀI KHOẢN ---
+                    const oldUser = JSON.parse(localStorage.getItem('user') || '{}');
+                    const newUserId = data.user.user_id || data.user.id; // Tùy thuộc vào khóa chính trả về từ DB của bạn (user_id hoặc id)
 
-                // Chuyển hướng sau 1 giây dựa vào role
-                setTimeout(() => {
-                    if (data.user.role === 'admin') {
-                        window.location.href = './Frontend/admin/index.html';
-                    } else {
-                        window.location.href = 'index.html';
+                    if (oldUser.user_id !== newUserId && oldUser.id !== newUserId) {
+                        // Nếu đăng nhập tài khoản khác với tài khoản trước đó, xóa sạch cache dữ liệu cũ
+                        localStorage.removeItem('userBookings');
+                        localStorage.removeItem('sunriseWallet');
+                        localStorage.removeItem('userPayments');
+                        localStorage.removeItem('userWalletTxs');
                     }
-                }, 1000);
+
+                    // Lưu JWT Token và thông tin user mới vào localStorage
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    localStorage.setItem('sunriseProfile', JSON.stringify(data.user));
+
+                    // Chuyển hướng sau 1 giây dựa vào role
+                    setTimeout(() => {
+                        if (data.user.role === 'admin') {
+                            window.location.href = './Frontend/admin/index.html';
+                        } else {
+                            window.location.href = 'index.html';
+                        }
+                    }, 1000);
 
             } else {
                 message.textContent = data.message || "Tài khoản hoặc mật khẩu không chính xác!";

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tổng quan Quản trị - Hotel Sunrise Đà Nẵng</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Liên kết file CSS riêng biệt -->
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <aside>
+        <div class="sidebar-brand">
+            <i class="fa-solid fa-hotel" style="font-size: 28px; color: var(--accent-gold);"></i>
+            <h2>SUNRISE</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="active"><a href="dashboard.html"><i class="fa-solid fa-chart-pie"></i> Tổng quan</a></li>
+            <li><a href="room_manage.html"><i class="fa-solid fa-door-closed"></i> Quản lý phòng</a></li>
+            <li><a href="bookings_manage.html"><i class="fa-solid fa-calendar-check"></i> Quản lý đặt phòng</a></li>
+            <li><a href="customers_manage.html"><i class="fa-solid fa-users"></i> Quản lý khách hàng</a></li>
+            <li><a href="employees_manage.html"><i class="fa-solid fa-user-tie"></i> Quản lý nhân viên</a></li>
+            <li><a href="invoices_manage.html"><i class="fa-solid fa-file-invoice-dollar"></i> Quản lý hóa đơn</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <button class="btn-logout" onclick="logoutAdmin()">
+                <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+            </button>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <!-- HEADER -->
+        <header>
+            <div class="header-title">
+                <h1>Hệ thống Quản trị Khách sạn</h1>
+                <p>Trang tổng quan hệ thống Sunrise Đà Nẵng</p>
+            </div>
+            <div class="header-admin">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop" alt="Admin" class="admin-avatar">
+                <div class="admin-info">
+                    <span>Admin Hệ thống</span>
+                    <small>Quản trị viên</small>
+                </div>
+            </div>
+        </header>
+
+        <!-- DASHBOARD BODY -->
+        <div class="dashboard-body">
+            <!-- Welcome Banner -->
+            <div class="welcome-banner">
+                <div class="date-badge"><i class="fa-regular fa-calendar"></i> Thứ Sáu, 14/11/2026</div>
+                <h2>Chào mừng trở lại, Admin!</h2>
+                <p>Chúc bạn có một ngày làm việc hiệu quả và quản lý khách sạn mượt mà.</p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h4>Tổng số phòng</h4>
+                        <h2>120</h2>
+                        <span><i class="fa-solid fa-arrow-up"></i> +0%</span>
+                    </div>
+                    <div class="stat-icon bg-blue"><i class="fa-solid fa-bed"></i></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h4>Lượt đặt phòng (Tháng)</h4>
+                        <h2>842</h2>
+                        <span><i class="fa-solid fa-arrow-up"></i> +12.5%</span>
+                    </div>
+                    <div class="stat-icon bg-yellow"><i class="fa-solid fa-calendar-days"></i></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h4>Doanh thu (Tháng)</h4>
+                        <h2>1,28 Tỷ VNĐ</h2>
+                        <span><i class="fa-solid fa-arrow-up"></i> +15.8%</span>
+                    </div>
+                    <div class="stat-icon bg-green"><i class="fa-solid fa-wallet"></i></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h4>Khách hàng</h4>
+                        <h2>5.420</h2>
+                        <span><i class="fa-solid fa-arrow-up"></i> +8.3%</span>
+                    </div>
+                    <div class="stat-icon bg-purple"><i class="fa-solid fa-users"></i></div>
+                </div>
+            </div>
+
+            <!-- Content Grid: Chart & Recent Bookings -->
+            <div class="content-grid">
+                <!-- Biểu đồ doanh thu mô phỏng -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Doanh thu theo tháng</h3>
+                        <div style="font-size: 12px; color: var(--text-muted);">Năm 2026</div>
+                    </div>
+                    <div style="height: 250px; display: flex; align-items: center; justify-content: center; background: #f8fafc; border-radius: 8px; border: 1px dashed var(--border-color);">
+                        <p style="color: var(--text-muted); font-size: 14px;"><i class="fa-solid fa-chart-line" style="font-size: 24px; display: block; text-align: center; margin-bottom: 8px; color: #0284c7;"></i> Biểu đồ thống kê doanh thu trực quan</p>
+                    </div>
+                </div>
+
+                <!-- Đặt phòng gần đây -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Đặt phòng gần đây</h3>
+                        <a href="bookings_manage.html">Xem tất cả &rarr;</a>
+                    </div>
+                    <div class="recent-bookings-list">
+                        <div class="recent-booking-item">
+                            <div class="rb-info">
+                                <h5>Nguyễn Văn A</h5>
+                                <p>15/11 - 17/11/2026</p>
+                            </div>
+                            <span class="badge badge-confirmed">Đã xác nhận</span>
+                            <strong>4.500.000đ</strong>
+                        </div>
+                        <div class="recent-booking-item">
+                            <div class="rb-info">
+                                <h5>Trần Thị B</h5>
+                                <p>14/11 - 16/11/2026</p>
+                            </div>
+                            <span class="badge badge-active">Đang ở</span>
+                            <strong>3.800.000đ</strong>
+                        </div>
+                        <div class="recent-booking-item">
+                            <div class="rb-info">
+                                <h5>Lê Minh C</h5>
+                                <p>13/11 - 15/11/2026</p>
+                            </div>
+                            <span class="badge badge-pending">Chờ xác nhận</span>
+                            <strong>3.200.000đ</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

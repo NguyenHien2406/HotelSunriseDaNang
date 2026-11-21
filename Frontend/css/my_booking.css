@@ -1,0 +1,113 @@
+/* =========================================
+   SUNRISE HOTEL - MY BOOKING CSS
+   ========================================= */
+
+.booking-history-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.booking-history-container h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--navy, #0b2545);
+    margin-bottom: 24px;
+    font-size: 28px;
+}
+
+.booking-item-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    border: 1px solid #e2e8f0;
+}
+
+.booking-item-card img {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.booking-info h3 {
+    font-size: 18px;
+    color: #0b2545;
+    margin-bottom: 6px;
+}
+
+.booking-info p {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+
+.booking-status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.status-confirmed { background: #e0f2fe; color: #0369a1; }
+.status-completed { background: #dcfce7; color: #15803d; }
+.status-cancelled { background: #fee2e2; color: #b91c1c; }
+
+.booking-action-col {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+}
+
+.btn-cancel-booking {
+    background: #fee2e2;
+    color: #b91c1c;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-cancel-booking:hover {
+    background: #fecaca;
+}
+
+.empty-history {
+    text-align: center;
+    padding: 60px 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.empty-history i {
+    font-size: 48px;
+    color: #cbd5e1;
+    margin-bottom: 16px;
+}
+
+@media(max-width: 768px) {
+    .booking-item-card {
+        grid-template-columns: 1fr;
+    }
+    .booking-item-card img {
+        width: 100%;
+        height: 160px;
+    }
+    .booking-action-col {
+        text-align: left;
+        flex-direction: row;
+    }
+}

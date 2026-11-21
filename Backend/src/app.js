@@ -8,6 +8,8 @@ require('./config/database');
 
 // Import các routes
 const authRoutes = require('./routes/authRoutes');
+const bookingRoutes = require('./routes/bookingRoutes'); // <-- 1. Thêm import route đặt phòng
+const walletRoutes = require('./routes/walletRoutes');//
 
 const app = express();
 
@@ -23,6 +25,8 @@ app.use(express.static(path.join(__dirname, '../../')));
 
 // 3. Khai báo API Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/bookings', bookingRoutes); // <-- 2. Khai báo đường dẫn API đặt phòng
+app.use('/api/wallet', walletRoutes);
 
 // 4. Route mặc định trả về trang chủ index.html
 app.get('/', (req, res) => {

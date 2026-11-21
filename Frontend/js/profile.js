@@ -1,28 +1,24 @@
-// Dữ liệu mẫu hồ sơ cá nhân
-const defaultProfile = {
-  fullName: "Nguyễn Văn Hiến",
-  email: "hiennguyen@gmail.com",
-  phone: "0987 654 321",
-  birthday: "2006-06-14",
-  gender: "Nam",
-  address: "Đà Nẵng, Việt Nam",
-  avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&auto=format&fit=crop"
-};
-
-const sampleBookings = [
-  { room: "Phòng Deluxe Ocean View", checkIn: "15/11/2026", checkOut: "17/11/2026", status: "Đã hoàn thành", type: "success", image: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=400&auto=format&fit=crop" },
-  { room: "Phòng Superior City View", checkIn: "01/10/2026", checkOut: "03/10/2026", status: "Đã hủy", type: "cancel", image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=400&auto=format&fit=crop" }
-];
-
-const samplePayments = [
-  { id: "#HD000125", description: "Thanh toán đặt phòng", amount: "2.500.000đ", date: "15/11/2026", status: "Thành công" },
-  { id: "#GD000087", description: "Nạp ví điện tử", amount: "1.000.000đ", date: "10/10/2026", status: "Thành công" },
-  { id: "#HD000076", description: "Thanh toán đặt phòng", amount: "3.200.000đ", date: "01/10/2026", status: "Thành công" }
-];
-
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
-let profile = { ...defaultProfile, ...JSON.parse(localStorage.getItem("sunriseProfile") || "{}") };
+
+// Lấy thông tin user và token đăng nhập từ localStorage
+const token = localStorage.getItem("token");
+let loggedInUser = JSON.parse(localStorage.getItem("user") || "{}");
+
+// Nếu chưa đăng nhập, chuyển hướng về trang login
+if (!token || !loggedInUser.user_id) {
+  window.location.href = "../login.html";
+}
+
+let profile = {
+  fullName: loggedInUser.full_name || "Nguyễn Văn Hiến",
+  email: loggedInUser.email || "hiennguyen@gmail.com",
+  phone: loggedInUser.phone || "0987 654 321",
+  birthday: loggedInUser.birthday || "2006-06-14",
+  gender: loggedInUser.gender || "Nam",
+  address: loggedInUser.address || "Đà Nẵng, Việt Nam",
+  avatar: loggedInUser.avatar || "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&auto=format&fit=crop"
+};
 
 function showToast(message) {
   const toast = $("#toast");
@@ -35,96 +31,232 @@ function showToast(message) {
 
 function formatDate(dateString) {
   if (!dateString) return "Chưa cập nhật";
-  const [year, month, day] = dateString.split("-");
+  const parts = dateString.split("-");
+  if (parts.length !== 3) return dateString;
+  const [year, month, day] = parts;
   return `${day}/${month}/${year}`;
 }
 
 function renderProfile() {
-  $("#headerUserName").textContent = profile.fullName;
-  $("#sidebarName").textContent = profile.fullName;
-  $("#sidebarEmail").textContent = profile.email;
-  $("#infoName").textContent = profile.fullName;
-  $("#infoEmail").textContent = profile.email;
-  $("#infoPhone").textContent = profile.phone || "Chưa cập nhật";
-  $("#infoBirthday").textContent = formatDate(profile.birthday);
-  $("#infoGender").textContent = profile.gender || "Chưa cập nhật";
-  $("#infoAddress").textContent = profile.address || "Chưa cập nhật";
-  $("#sidebarAvatar").src = profile.avatar;
-  $("#mainAvatar").src = profile.avatar;
+  if ($("#headerUserName")) $("#headerUserName").textContent = profile.fullName;
+  if ($("#sidebarName")) $("#sidebarName").textContent = profile.fullName;
+  if ($("#sidebarEmail")) $("#sidebarEmail").textContent = profile.email;
+  if ($("#infoName")) $("#infoName").textContent = profile.fullName;
+  if ($("#infoEmail")) $("#infoEmail").textContent = profile.email;
+  if ($("#infoPhone")) $("#infoPhone").textContent = profile.phone || "Chưa cập nhật";
+  if ($("#infoBirthday")) $("#infoBirthday").textContent = formatDate(profile.birthday);
+  if ($("#infoGender")) $("#infoGender").textContent = profile.gender || "Chưa cập nhật";
+  if ($("#infoAddress")) $("#infoAddress").textContent = profile.address || "Chưa cập nhật";
+  if ($("#sidebarAvatar")) $("#sidebarAvatar").src = profile.avatar;
+  if ($("#mainAvatar")) $("#mainAvatar").src = profile.avatar;
 }
 
-function renderBookings() {
-  const list = $("#bookingList");
-  if (!list) return;
-  list.innerHTML = sampleBookings.map(item => `
-    <article class="booking-item">
-      <img src="${item.image}" alt="${item.room}">
-      <div class="booking-details">
-        <h3>${item.room}</h3>
-        <p><i class="fa-regular fa-calendar"></i> Nhận phòng: ${item.checkIn}</p>
-        <p><i class="fa-regular fa-calendar-check"></i> Trả phòng: ${item.checkOut}</p>
-      </div>
-      <span class="status ${item.type}">${item.status}</span>
-    </article>
-  `).join("");
-}
+// --- 1. LẤY & RENDER LỊCH SỬ ĐẶT PHÒNG TỪ MYSQL ---
+async function renderBookings() {
+    const list = $("#bookingList");
+    if (!list) return;
 
-function renderPayments() {
-  const body = $("#paymentTableBody");
-  if (!body) return;
-  body.innerHTML = samplePayments.map(item => `
-    <tr>
-      <td><strong>${item.id}</strong></td>
-      <td>${item.description}</td>
-      <td><strong>${item.amount}</strong></td>
-      <td>${item.date}</td>
-      <td><span class="status success">${item.status}</span></td>
-    </tr>
-  `).join("");
-}
+    try {
+        const response = await fetch('http://localhost:5000/api/bookings', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        const result = await response.json();
 
-// --- QUẢN LÝ VÍ & NẠP TIỀN GIẢ LẬP ---
-function getWalletData() {
-  const data = JSON.parse(localStorage.getItem("sunriseWallet") || "null");
-  if (data) return data;
-  
-  const initialWallet = {
-    balance: 1500000,
-    history: [
-      { id: "#GD001", description: "Nạp tiền qua Ví MoMo", amount: "+500.000đ", date: "10/05/2026 14:30", status: "Thành công" },
-      { id: "#GD002", description: "Thanh toán đặt phòng", amount: "-1.000.000đ", date: "01/05/2026 09:15", status: "Thành công" }
-    ]
-  };
-  localStorage.setItem("sunriseWallet", JSON.stringify(initialWallet));
-  return initialWallet;
-}
+        if (!result.success || !result.data || result.data.length === 0) {
+            list.innerHTML = `<p style="text-align:center; color: #64748b; padding: 20px;">Bạn chưa có lịch sử đặt phòng nào.</p>`;
+            return;
+        }
 
-function saveWalletData(wallet) {
-  localStorage.setItem("sunriseWallet", JSON.stringify(wallet));
-}
+        const bookings = result.data;
 
-function renderWallet() {
-  const wallet = getWalletData();
-  const formattedBalance = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(wallet.balance);
-  const balanceEl = $("#walletBalanceDisplay");
-  if (balanceEl) balanceEl.textContent = formattedBalance;
+        list.innerHTML = bookings.map(item => {
+            let statusBadge = '';
+            let statusClass = '';
+            const status = item.booking_status || item.status;
 
-  const historyBody = $("#walletHistoryBody");
-  if (historyBody) {
-    if (wallet.history.length === 0) {
-      historyBody.innerHTML = `<tr><td colspan="5" class="empty-state">Chưa có giao dịch nào.</td></tr>`;
-      return;
+            if (status === 'confirmed' || status === 'pending') {
+                statusBadge = 'Chờ thanh toán';
+                statusClass = 'pending';
+            } else if (status === 'paid' || status === 'completed') {
+                statusBadge = 'Đã thanh toán';
+                statusClass = 'success';
+            } else if (status === 'cancelled') {
+                statusBadge = 'Đã hủy';
+                statusClass = 'cancel';
+            }
+
+            let actionBtns = '';
+            if (status === 'confirmed' || status === 'pending') {
+                actionBtns = `
+                    <div style="margin-top: 8px; display: flex; gap: 8px;">
+                        <button onclick="profilePayBooking('${item.booking_id || item.id}')" style="background: #0284c7; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; font-weight: 600;">Thanh toán ví</button>
+                        <button onclick="profileCancelBooking('${item.booking_id || item.id}')" style="background: #fee2e2; color: #b91c1c; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; font-weight: 600;">Hủy</button>
+                    </div>
+                `;
+            }
+
+            const roomName = item.room_name || "Phòng khách sạn Sunrise";
+            const checkIn = item.check_in ? item.check_in.split('T')[0] : '';
+            const checkOut = item.check_out ? item.check_out.split('T')[0] : '';
+            const roomsCount = item.rooms_count || 1;
+            const totalPrice = item.total_amount || 0;
+            const imageUrl = item.image_url || 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=400&auto=format&fit=crop';
+
+            return `
+                <article class="booking-item" style="display: flex; gap: 15px; align-items: center; border-bottom: 1px solid #e2e8f0; padding: 15px 0;">
+                    <img src="${imageUrl}" alt="${roomName}" style="width: 100px; height: 75px; object-fit: cover; border-radius: 8px;">
+                    <div class="booking-details" style="flex: 1;">
+                        <h3 style="font-size: 16px; margin-bottom: 4px;">${roomName}</h3>
+                        <p style="font-size: 13px; color: #64748b; margin-bottom: 2px;"><i class="fa-regular fa-calendar"></i> Nhận phòng: ${checkIn} — Trả phòng: ${checkOut}</p>
+                        <p style="font-size: 13px; color: #64748b; margin-bottom: 2px;"><i class="fa-solid fa-users"></i> Số phòng: <strong>${roomsCount} phòng</strong> Mã đơn: <strong>#${item.booking_code || item.booking_id}</strong></p>
+                        <p style="font-size: 12px; color: #dc2626; font-weight: bold; margin-top: 4px;">Tổng tiền: ${Number(totalPrice).toLocaleString("vi-VN")}đ</p>
+                        ${actionBtns}
+                    </div>
+                    <span class="status ${statusClass}" style="padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700;">${statusBadge}</span>
+                </article>
+            `;
+        }).join("");
+    } catch (error) {
+        console.error("Lỗi tải lịch sử đặt phòng:", error);
+        list.innerHTML = `<p style="text-align:center; color: #dc2626; padding: 20px;">Không thể tải dữ liệu từ máy chủ.</p>`;
     }
+}
 
-    historyBody.innerHTML = wallet.history.map(item => `
-      <tr>
-        <td><strong>${item.id}</strong></td>
-        <td>${item.description}</td>
-        <td><strong style="color: ${item.amount.startsWith('+') ? '#167443' : '#dc2626'};">${item.amount}</strong></td>
-        <td>${item.date}</td>
-        <td><span class="status success">${item.status}</span></td>
-      </tr>
-    `).join("");
+// --- 2. THANH TOÁN ĐƠN PHÒNG BẰNG VÍ QUA API ---
+window.profilePayBooking = async function(bookingId) {
+    if (!confirm(`Xác nhận thanh toán đơn phòng #${bookingId} từ Ví Sunrise?`)) return;
+
+    try {
+        const response = await fetch('http://localhost:5000/api/wallet/pay-booking', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ bookingId })
+        });
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+            showToast("Thanh toán thành công từ ví!");
+            renderBookings();
+            renderWallet();
+        } else {
+            showToast(result.message || "Thanh toán thất bại!");
+        }
+    } catch (error) {
+        console.error("Lỗi thanh toán:", error);
+        showToast("Lỗi kết nối đến máy chủ.");
+    }
+};
+
+// --- 3. HỦY ĐẶT PHÒNG QUA API ---
+window.profileCancelBooking = async function(bookingId) {
+    if (!confirm(`Bạn có chắc chắn muốn hủy đơn đặt phòng #${bookingId}?`)) return;
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/bookings/${bookingId}/cancel`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+            showToast("Đã hủy đặt phòng thành công.");
+            renderBookings();
+        } else {
+            showToast(result.message || "Không thể hủy đơn phòng!");
+        }
+    } catch (error) {
+        console.error("Lỗi hủy phòng:", error);
+        showToast("Lỗi kết nối đến máy chủ.");
+    }
+};
+
+async function renderPayments() {
+    const body = $("#paymentTableBody");
+    if (!body) return;
+
+    try {
+        const response = await fetch('http://localhost:5000/api/wallet', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        const result = await response.json();
+
+        if (result.success && result.history) {
+            // Lọc các giao dịch thanh toán đơn phòng từ ví hoặc lịch sử ví
+            const payments = result.history.filter(item => 
+                item.description && (item.description.includes('Thanh toán') || item.description.includes('phòng') || item.transaction_type === 'booking_payment')
+            );
+
+            if (payments.length === 0) {
+                body.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#64748b; padding: 20px;">Chưa có giao dịch thanh toán phòng nào.</td></tr>`;
+                return;
+            }
+
+            body.innerHTML = payments.map(item => `
+                <tr>
+                  <td><strong>${item.transaction_code || item.reference_code || item.id}</strong></td>
+                  <td>${item.description}</td>
+                  <td><strong style="color: #dc2626;">${item.amount}</strong></td>
+                  <td>${new Date(item.created_at || item.date).toLocaleString('vi-VN')}</td>
+                  <td><span class="status success">Thành công</span></td>
+                </tr>
+            `).join("");
+        } else {
+            body.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#64748b; padding: 20px;">Chưa có lịch sử thanh toán.</td></tr>`;
+        }
+    } catch (error) {
+        console.error("Lỗi tải lịch sử thanh toán:", error);
+        body.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#dc2626; padding: 20px;">Không thể tải dữ liệu thanh toán.</td></tr>`;
+    }
+}
+
+// --- 4. QUẢN LÝ VÍ & NẠP TIỀN QUA API ---
+async function renderWallet() {
+  const balanceEl = $("#walletBalanceDisplay");
+  const historyBody = $("#walletHistoryBody");
+
+  try {
+      const response = await fetch('http://localhost:5000/api/wallet', {
+          headers: {
+              'Authorization': `Bearer ${token}`
+          }
+      });
+      const result = await response.json();
+
+      if (result.success) {
+          const balance = result.balance || 0;
+          if (balanceEl) {
+              balanceEl.textContent = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(balance);
+          }
+
+          if (historyBody) {
+              const history = result.history || [];
+              if (history.length === 0) {
+                  historyBody.innerHTML = `<tr><td colspan="5" class="empty-state" style="text-align:center; color:#64748b; padding: 20px;">Chưa có giao dịch nào.</td></tr>`;
+                  return;
+              }
+
+              historyBody.innerHTML = history.map(item => `
+                <tr>
+                  <td><strong>${item.transaction_code || item.id}</strong></td>
+                  <td>${item.description}</td>
+                  <td><strong style="color: ${item.amount && item.amount.startsWith('+') ? '#167443' : '#dc2626'};">${item.amount}</strong></td>
+                  <td>${item.created_at ? new Date(item.created_at).toLocaleString('vi-VN') : 'Vừa xong'}</td>
+                  <td><span class="status success">${item.status || 'Thành công'}</span></td>
+                </tr>
+              `).join("");
+          }
+      }
+  } catch (error) {
+      console.error("Lỗi tải thông tin ví:", error);
   }
 }
 
@@ -135,6 +267,7 @@ function openSection(section) {
 
 function startEdit() {
   const form = $("#editProfileForm");
+  if (!form) return;
   form.fullName.value = profile.fullName;
   form.email.value = profile.email;
   form.phone.value = profile.phone;
@@ -164,47 +297,28 @@ function initProfile() {
     button.addEventListener("click", () => openSection(button.dataset.section));
   });
 
-  $("#editProfileBtn").addEventListener("click", startEdit);
-  $("#cancelEditBtn").addEventListener("click", stopEdit);
+  if ($("#editProfileBtn")) $("#editProfileBtn").addEventListener("click", startEdit);
+  if ($("#cancelEditBtn")) $("#cancelEditBtn").addEventListener("click", stopEdit);
 
-  $("#editProfileForm").addEventListener("submit", event => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    profile = {
-      ...profile,
-      fullName: form.fullName.value.trim(),
-      email: form.email.value.trim(),
-      phone: form.phone.value.trim(),
-      birthday: form.birthday.value,
-      gender: form.gender.value,
-      address: form.address.value.trim()
-    };
-    localStorage.setItem("sunriseProfile", JSON.stringify(profile));
-    renderProfile();
-    stopEdit();
-    showToast("Cập nhật thông tin thành công!");
-  });
-
-  $("#avatarInput").addEventListener("change", event => {
-    const file = event.target.files[0];
-    if (!file) return;
-    if (!file.type.startsWith("image/")) {
-      showToast("Vui lòng chọn tệp hình ảnh.");
-      return;
-    }
-    if (file.size > 3 * 1024 * 1024) {
-      showToast("Ảnh đại diện không được vượt quá 3MB.");
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = () => {
-      profile.avatar = reader.result;
-      localStorage.setItem("sunriseProfile", JSON.stringify(profile));
+  if ($("#editProfileForm")) {
+    $("#editProfileForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      profile = {
+        ...profile,
+        fullName: form.fullName.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        birthday: form.birthday.value,
+        gender: form.gender.value,
+        address: form.address.value.trim()
+      };
+      localStorage.setItem("user", JSON.stringify({ ...loggedInUser, ...profile }));
       renderProfile();
-      showToast("Đã cập nhật ảnh đại diện.");
-    };
-    reader.readAsDataURL(file);
-  });
+      stopEdit();
+      showToast("Cập nhật thông tin thành công!");
+    });
+  }
 
   // Modal Nạp tiền ví
   const modal = $("#topupModal");
@@ -226,7 +340,7 @@ function initProfile() {
 
   const topupForm = $("#topupForm");
   if (topupForm) {
-    topupForm.addEventListener("submit", (e) => {
+    topupForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const amount = Number($("#topupAmountInput").value);
       const method = $("#topupMethod").value;
@@ -236,64 +350,42 @@ function initProfile() {
         return;
       }
 
-      showToast("Đang kết nối cổng thanh toán giả lập...");
+      showToast("Đang kết nối cổng thanh toán...");
 
-      setTimeout(() => {
-        const wallet = getWalletData();
-        wallet.balance += amount;
+      try {
+          const response = await fetch('http://localhost:5000/api/wallet/topup', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify({ amount, method })
+          });
+          const result = await response.json();
 
-        const randomId = "#GD" + Math.floor(100000 + Math.random() * 900000);
-        const now = new Date();
-        const dateTimeStr = `${String(now.getDate()).padStart(2,'0')}/${String(now.getMonth()+1).padStart(2,'0')}/${now.getFullYear()} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-
-        wallet.history.unshift({
-          id: randomId,
-          description: `Nạp tiền qua ${method}`,
-          amount: "+" + new Intl.NumberFormat('vi-VN').format(amount) + "đ",
-          date: dateTimeStr,
-          status: "Thành công"
-        });
-
-        saveWalletData(wallet);
-        renderWallet();
-
-        modal.style.display = "none";
-        topupForm.reset();
-        showToast("Nạp tiền vào ví thành công!");
-      }, 1500);
+          if (response.ok && result.success) {
+              modal.style.display = "none";
+              topupForm.reset();
+              showToast("Nạp tiền vào ví thành công!");
+              renderWallet();
+          } else {
+              showToast(result.message || "Nạp tiền thất bại!");
+          }
+      } catch (error) {
+          console.error("Lỗi nạp tiền:", error);
+          showToast("Lỗi kết nối đến máy chủ.");
+      }
     });
   }
 
-  $$(".toggle-password").forEach(button => {
-    button.addEventListener("click", () => {
-      const input = button.parentElement.querySelector("input");
-      const show = input.type === "password";
-      input.type = show ? "text" : "password";
-      button.innerHTML = `<i class="fa-regular ${show ? "fa-eye-slash" : "fa-eye"}"></i>`;
-    });
-  });
-
-  $("#passwordForm").addEventListener("submit", event => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const current = form.currentPassword.value;
-    const next = form.newPassword.value;
-    const confirm = form.confirmPassword.value;
-
-    if (current.length < 1) return showToast("Vui lòng nhập mật khẩu hiện tại.");
-    if (next.length < 8) return showToast("Mật khẩu mới phải có ít nhất 8 ký tự.");
-    if (next !== confirm) return showToast("Mật khẩu xác nhận không khớp.");
-    
-    showToast("Đổi mật khẩu thành công!");
-    form.reset();
-    $$(".toggle-password").forEach(button => button.innerHTML = '<i class="fa-regular fa-eye"></i>');
-  });
-
-  $("#menuToggle").addEventListener("click", () => $("#mainNav").classList.toggle("open"));
+  if ($("#menuToggle")) {
+    $("#menuToggle").addEventListener("click", () => $("#mainNav").classList.toggle("open"));
+  }
 
   $$("[data-logout]").forEach(button => button.addEventListener("click", () => {
     if (confirm("Bạn có chắc chắn muốn đăng xuất?")) {
       localStorage.removeItem("token");
+      localStorage.removeItem("user");
       window.location.href = "../../index.html";
     }
   }));

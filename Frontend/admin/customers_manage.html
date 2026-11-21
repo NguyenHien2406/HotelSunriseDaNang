@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Khách hàng - Hotel Sunrise Đà Nẵng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/admin_common.css">
+</head>
+<body>
+
+    <aside>
+        <div class="sidebar-brand">
+            <i class="fa-solid fa-hotel" style="font-size: 28px; color: var(--accent-gold);"></i>
+            <h2>SUNRISE</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html"><i class="fa-solid fa-chart-pie"></i> Tổng quan</a></li>
+            <li><a href="room_manage.html"><i class="fa-solid fa-door-closed"></i> Quản lý phòng</a></li>
+            <li><a href="bookings_manage.html"><i class="fa-solid fa-calendar-check"></i> Quản lý đặt phòng</a></li>
+            <li class="active"><a href="customers_manage.html"><i class="fa-solid fa-users"></i> Quản lý khách hàng</a></li>
+            <li><a href="employees_manage.html"><i class="fa-solid fa-user-tie"></i> Quản lý nhân viên</a></li>
+            <li><a href="invoices_manage.html"><i class="fa-solid fa-file-invoice-dollar"></i> Quản lý hóa đơn</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <button class="btn-logout" onclick="logoutAdmin()">
+                <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+            </button>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header>
+            <div class="header-title">
+                <h1>Quản lý Khách hàng</h1>
+                <p>Danh sách tài khoản thành viên và số dư Ví Sunrise</p>
+            </div>
+        </header>
+
+        <div class="admin-body">
+            <div class="filter-card">
+                <div class="search-box">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Tìm theo tên, email, số điện thoại...">
+                </div>
+                <div class="filter-selects">
+                    <select>
+                        <option value="">Tất cả trạng thái</option>
+                        <option value="active">Đang hoạt động</option>
+                        <option value="locked">Đã khóa</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Họ và tên</th>
+                            <th>Email</th>
+                            <th>Số điện thoại</th>
+                            <th>Số dư Ví</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>#KH-001</strong></td>
+                            <td>Nguyễn Ngọc Hiển</td>
+                            <td>hienbtn2k6@gmail.com</td>
+                            <td>0987 654 321</td>
+                            <td><strong style="color: #0284c7;">2.500.000đ</strong></td>
+                            <td><span class="status-badge status-green">Hoạt động</span></td>
+                            <td>
+                                <button class="btn-action btn-edit" title="Xem chi tiết"><i class="fa-solid fa-eye"></i></button>
+                                <button class="btn-action btn-delete" title="Khóa tài khoản"><i class="fa-solid fa-lock"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#KH-002</strong></td>
+                            <td>Lê Minh C</td>
+                            <td>leminhc@gmail.com</td>
+                            <td>0935 111 222</td>
+                            <td><strong>500.000đ</strong></td>
+                            <td><span class="status-badge status-green">Hoạt động</span></td>
+                            <td>
+                                <button class="btn-action btn-edit" title="Xem chi tiết"><i class="fa-solid fa-eye"></i></button>
+                                <button class="btn-action btn-delete" title="Khóa tài khoản"><i class="fa-solid fa-lock"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/admin_common.js"></script>
+</body>
+</html>

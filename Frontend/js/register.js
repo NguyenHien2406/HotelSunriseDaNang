@@ -121,6 +121,13 @@ registerForm.addEventListener("submit", async function (event) {
         if (response.ok) {
             message.style.color = "#15803d";
             message.textContent = "Đăng ký thành công! Đang chuyển hướng đến trang đăng nhập...";
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            localStorage.removeItem('sunriseProfile');
+            localStorage.removeItem('userBookings');
+            localStorage.removeItem('sunriseWallet');
+            localStorage.removeItem('userPayments');
+            localStorage.removeItem('userWalletTxs');
 
             // Chuyển hướng sang trang login sau 1.5 giây
             setTimeout(() => {
@@ -130,7 +137,6 @@ registerForm.addEventListener("submit", async function (event) {
             message.style.color = "#dc2626";
             message.textContent = data.message || "Đăng ký thất bại, vui lòng thử lại!";
         }
-
     } catch (error) {
         console.error("Lỗi kết nối:", error);
         message.style.color = "#dc2626";
