@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Chuyển hướng sau 1 giây dựa vào role
                     setTimeout(() => {
                         if (data.user.role === 'admin') {
-                            window.location.href = './Frontend/admin/index.html';
+                            window.location.href = './Frontend/admin/dashboard.html';
                         } else {
                             window.location.href = 'index.html';
                         }
